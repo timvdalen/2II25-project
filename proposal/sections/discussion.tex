@@ -1,6 +1,7 @@
 As mentioned in section~\ref{sec:datasets} we will use DPpedia as the main source
 for our data about connections.
 
+\paragraph{}
 However, since DBpedia is a very general data source it's not optimized
 for providing us with movie specific data.
 The various namespaces DBpedia uses help us a great deal,
@@ -8,6 +9,7 @@ but where the data in DBpedia is missing or incomplete,
 we will use the excellent \href{http://trakt.tv/}{trakt.tv} API
 to supplement the data we get from DBpedia.
 
+\paragraph{}
 Trakt also allows a user to mark any movie they have
 already watched as ``seen''.
 To save our users the trouble of adding every move they
@@ -18,6 +20,7 @@ trakt API.
 This importer will allow trakt users to select multiple
 of their watched movies and import those into the graph.
 
+\paragraph{}
 Users of Facebook will be able to import movies they
 have marked as liked on their profile.
 We will accomplish this using the \texttt{/me/movies}
@@ -26,6 +29,7 @@ Similar to the importer for trakt, Facebook users can
 select which movies they want to import into the graph
 for processing.
 
+\paragraph{}
 Using the data from these services in combination with
 our primary data source, we aim to create a simple
 and fluid user experience that will turn data (a list

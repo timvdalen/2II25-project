@@ -5,6 +5,7 @@ This namespace contains predicates such as \texttt{starring}, \texttt{director},
 We will assign edge-weights to these predicates, so that an edge of type \texttt{starring}
 is more important than an edge of type \texttt{country}.
 
+\paragraph{}
 Here, we define ``being related'' as sharing a certain value for a property.
 So, for two movies \textbf{a} and \textbf{b}, $\textbf{a} \neq \textbf{b}$,
 
@@ -17,6 +18,7 @@ So, for two movies \textbf{a} and \textbf{b}, $\textbf{a} \neq \textbf{b}$,
 
 means that \textbf{a} and \textbf{b} are related because they share an actor in a major role.
 
+\paragraph{}
 This way, we will directly link movie nodes that are in some way connected to each other in DBpedia.
 Because of this destillation process, the resulting graph will be much more sparse
 and we will easily be able to see the information we are interested in.
