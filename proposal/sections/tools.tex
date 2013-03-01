@@ -6,20 +6,45 @@ Our aim is to use modern tools and technologies for this project, to make the mo
 		
 	\item[GitHub]\hfill\\
 		We will use \textit{GitHub} as our \textit{git} host. Even though it is technically not needed because of the distributed nature of \textit{git}, \textit{GitHub} makes it easy to manage our project.
+		For instance, the issues feature integrates a bug tracker with git, allowing us to mention specific issues in our commits and marking commits as solving a certain issue.
+		It also adds a wiki to our repository, which we plan to use to store our research.
 	
 	\item[Repushitory]\hfill\\
 		To deploy our code to our server, we will use \href{https://github.com/nubisonline/repushitory}{nubisonline/repushitory}.
+		It is a simple Ruby script that uses GitHub's post-push hooks to upload code to a server you configure.
+		Using git's branching model, it uploads different versions of your project (for instance a stable and development branch) to potentially different servers, allowing us to test our code in a production environment while we still have a stable version running somewhere else.
 
 	\item[LESS]\hfill\\
 		To style our pages, we will use \textit{CSS} with \textit{LESS} as the preprocessor.
+		\textit{LESS} syntax is closely related to \textit{CSS} but it adds variables, functions, and hierarchicality.
+		This will help us in writing semantically meaningful stylesheets.
+		\textit{LESS} can be compiled into \textit{CSS} on the server side or on the client side using \textit{JavaScript}.
+		We choose to compile on the server side since we only need to do that once, while compiling on the client side has to be done every time a page is loaded, causing unnecessary delays.
+		\textit{Repushitory} has \textit{LESS} support.
+		If we configure it to do so, it will compile any \textit{LESS} file it finds into a \textit{CSS} file with the same filename (but a .css extension).
 
 	\item[jQuery]\hfill\\
+		\textit{jQuery} is a \textit{JS} libary that adds a lot of features. 
 		We will use \textit{jQuery} to easily select element from our \textit{DOM}, to abstract from browser specific code and to manage our \textit{AJAX} requests.
+		\textit{jQuery} has a mechanism for selecting \textit{DOM} elements to operate on using \textit{CSS} selectors.
+		Using this results in a clean system where we select elements of our \textit{HTML} in the same way in both \textit{CSS/LESS} and \textit{JS}.
+		It also makes changing \textit{CSS} properties of elements very easy and allows animation between two values for a certain \textit{CSS} property.
 
 	\item[Bootstrap]\hfill\\
-		Bootstrap is a \textit{CSS} suite (with some JS tools) that contains a lot of base blocks for \textit{CSS}, like various buttons.
+		\textit{Bootstrap} is a \textit{CSS} suite (with some \textit{JS} tools) that contains a lot of base blocks for \textit{CSS}, like various buttons.
 		We will use it for its great form and typography elements.
+
+	\item[FontAwesome]\hfill\\
+		\textit{FontAwesome} is an iconic web font that is designed for use with \textit{Bootstrap}.
+		It adds a lot of great icons to \textit{Bootstrap} that are available in a simple way. 
+
+	\item[REST]\hfill\\
+		To facilitate communication between our front-end and our back-end, we will implement
+		a \textit{API} based on the \textit{RESTful} architectural style.
 
 	\item[JSON]\hfill\\
 		The data we send between our back- and front-end (using \textit{AJAX}) will be encoded in the \textit{JSON} data format.
+		We chose this format because it is very light (for instance compared to XML) while it can still be used to express
+		full objects and because the \textit{jQuery} \textit{AJAX} methods automatically return \textit{JS} objects when
+		they encounter \textit{JSON}.
 \end{description}
