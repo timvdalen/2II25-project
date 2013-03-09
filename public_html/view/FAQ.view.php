@@ -2,7 +2,7 @@
 	/*
 	 * Outputs the FAQ page
 	 */
-	class Home extends View{
+	class FAQ extends View{
 		/*
 		 * Frequenty asked questions
 		 * @var array $questions
