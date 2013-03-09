@@ -312,3 +312,11 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
   Deny from all
   Satisfy All
 </FilesMatch>
+
+# ----------------------------------------------------------------------
+# Page rewrites
+# ----------------------------------------------------------------------
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*) index.php?page=$1
+
