@@ -40,7 +40,7 @@
 		 */
 		public $fullScreen
 		
-		function __construct($id, $name, $viewName, $location, $inMenu){
+		function __construct($id, $name, $viewName, $location, $inMenu, $fullScreen){
 			$this->id = $id;
 			$this->name = $name;
 			$this->viewName = $viewName;
