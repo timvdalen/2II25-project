@@ -38,7 +38,7 @@
 		 * Whether or not this page should be shown fullscreen
 		 * @var bool $fullScreen
 		 */
-		public $fullScreen
+		public $fullScreen;
 		
 		function __construct($id, $name, $viewName, $location, $inMenu, $fullScreen){
 			$this->id = $id;
