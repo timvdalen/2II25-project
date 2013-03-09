@@ -9,8 +9,8 @@ function show_trailer(e){
 
 function hide_trailer(e){
 	$("#embed").hide(200, function(){
-		$("embed").attr("src", "about:blank");
-		$("graph").show(200);
+		$("#embed").attr("src", "about:blank");
+		$("#graph").show(200);
 		$("#movie-trailer").text("Show trailer").click(show_trailer);
 	});
 }
