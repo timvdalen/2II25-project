@@ -24,7 +24,7 @@
 </div>
 <div>
 	Cinetre.es is a Web Technology project by TU/e students. 
-	It's goal is to analyse the user's choice in movies by searching for similarities on multiple levels.
+	Its goal is to analyse the user's choice in movies by searching for similarities on multiple levels.
 </div>
 ENDHTML;
 
