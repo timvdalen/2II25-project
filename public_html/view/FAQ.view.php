@@ -16,7 +16,7 @@
 		 *  Contains the arguments for this page
 		 */
 		function __construct($arguments){
-			$questions = array(
+			$this->questions = array(
 				"What is cinetre.es?" => "We don't even know.",
 				"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
 			);
@@ -30,19 +30,40 @@
 		 */
 		public function render(){
 			$content = <<<ENDHTML
-<div class="hero-unit">
-	<h2>F.A.Q.</h2>
+<div class="page-header">
+	<h1> F.A.Q. <small>Frequently Asked Questions</small></h1>
+</div>
+<div>
+	<ul>
 ENDHTML;
-				foreach($this->$questions as $q => $a) {
+				foreach($this->questions as $q => $a) {
 					$content .= <<<ENDHTML
-	<p> 
-		$q </ br>
-		$a
-	</p>
+		<li>
+			<a href = "#$q">$q</a>
+		</li>
+ENDHTML;
+				}
+					$content .= <<<ENDHTML
+	</ul>
+</div>		
+<div>
+	<dl>
+ENDHTML;
+				foreach($this->questions as $q => $a) {
+					$content .= <<<ENDHTML
+			<a name = "$q"></a>
+			<p>
+				<dt>
+					$q
+				</dt>
+				<dd>
+					$a
+				</dd>
+			</p>
 ENDHTML;
 				}
 				$content .= <<<ENDHTML
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis nibh at risus mollis gravida. Fusce vulputate consectetur ornare. Nam eros urna, molestie quis consectetur in, convallis eget eros. Curabitur adipiscing ipsum eu diam vulputate varius. Ut in nulla non metus dapibus consequat eu ut lorem. Nunc consequat odio et urna aliquam bibendum. Ut mi felis, consectetur id tristique quis, bibendum vel metus. Nullam sit amet lacus nisl.</p>
+	</dl>
 </div>
 ENDHTML;
 
