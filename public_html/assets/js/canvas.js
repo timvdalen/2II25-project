@@ -17,6 +17,9 @@ function drawNode(x, y, size, weight) {
 
 $(function(){
 	var canvas = $("#graph")[0];
+	canvas.width = $("#graph").width();
+	canvas.height = $("#graph").height();
+
 	var g = canvas.getContext("2d");
 
 	g.font = "30px Arial"
