@@ -8,7 +8,7 @@
 		 * @var array $questions
 		 */
 		private $questions = array(
-			"What is cinetre.es?" => "We don't even know."
+			"What is cinetre.es?" => "We don't even know.",
 			"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
 		);
 	
