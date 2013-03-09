@@ -7,7 +7,7 @@
 		 * Frequenty asked questions
 		 * @var array $questions
 		 */
-		private var $questions = array(
+		private $questions = array(
 			"What is cinetre.es?" => "We don't even know."
 			"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
 		)
@@ -47,4 +47,4 @@ ENDHTML;
 			return $content;
 		}
 	}
-?>	
+?>
