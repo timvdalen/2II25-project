@@ -20,5 +20,5 @@ $(function(){
 	var g = canvas.getContext("2d");
 
 	g.font = "30px Arial"
-	g.fillText(canvas.width, 10, 10);
+	g.fillText($("#graph").width(), 10, 10);
 });
