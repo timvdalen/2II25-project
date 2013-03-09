@@ -50,7 +50,7 @@
 			echo $navbar->render();
 		?>
 
-        <div class="container">
+        <div class="container<?php if($page->fullScreen){ echo "-fluid"; } ?>">
 			<?php
 				echo $view->render();
 			?>
