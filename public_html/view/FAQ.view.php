@@ -10,7 +10,7 @@
 		private $questions = array(
 			"What is cinetre.es?" => "We don't even know."
 			"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
-		)
+		);
 	
 		/*
 		 * Constructs the FAQ page
@@ -29,7 +29,7 @@
 		public function render(){
 			$content = <<<ENDHTML
 <div class="hero-unit">
-	<h1>F.A.Q.</h1>
+	<h2>F.A.Q.</h2>
 ENDHTML;
 				foreach($questions as $q => $a) {
 					$content .= <<<ENDHTML
