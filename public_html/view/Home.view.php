@@ -21,7 +21,8 @@
 			$this->selected = new Movie(0, 0, 
 				"The Hangover Part III (2013)", 
 				"http://cdn1.screenrant.com/wp-content/uploads/The-Hangover-3-Poster-Harry-Potter-570x844.jpg", 
-				"This time, there's no wedding. No bachelor party. What could go wrong, right? But when the Wolfpack hits the road, all bets are off.");
+				"This time, there's no wedding. No bachelor party. What could go wrong, right? But when the Wolfpack hits the road, all bets are off.",
+				"http://youtube.com/watch?v=IL_g4yY0qnc");
 		}
 		
 		/*
@@ -32,27 +33,29 @@
 		 */
 		public function render(){
 			$content = <<<ENDHTML
-<div class = "row-fluid">
-	<div class = "span9">
-		<canvas id = "graph"></canvas>
-		<script type=¨text/javascript¨ src=¨assets/js/canvas.js¨></script>
+<div class="row-fluid">
+	<div id="main-pane" class="span9">
+		<canvas id="graph"></canvas>
+		<iframe id="embed" seamless></iframe>
+		<script type="text/javascript" src="assets/js/canvas.js"></script>
 	</div>
-	<div id = "movie-info" class = "span3 well">
-		<h4>
-ENDHTML;
-			$content .= $this->selected->title;
-			$content .= <<<ENDHTML
+	<div id="movie-info" class="span3 well">
+		<h4 id="movie-title">
+			{$this->selected->title}
 		</h4>
-		<div class = "row-fluid">
-			<div class = "span8 offset2">
-				<img src = {$this->selected->poster}></img>
+		<div id="movie-image" class="row-fluid">
+			<div class="span8 offset2">
+				<img src="{$this->selected->poster}"></img>
 			</div>
 		</div>
-		<div>
+		<p id="movie-overview">
+			{$this->selected->overview}
+		</p>
 ENDHTML;
-			$content .= $this->selected->overview;
-			$content .= <<<ENDHTML
-		</div>
+			if($this->selected->trailer_link != ""){
+				$content = "<a id='movie-trailer' data-link='{$this->selected->trailer_link}'>Watch trailer</a>";
+			}
+			$content = <<<ENDHTML
 	</div>
 </div>
 ENDHTML;

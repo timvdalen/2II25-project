@@ -45,7 +45,17 @@
 			$this->title = $title;
 			$this->poster = $poster;
 			$this->overview = $overview;
-			$this->trailer_link = $trailer_link;
+			$this->trailer_link = Movie::parseTrailerLink($trailer_link);
+		}
+
+		public static function parseTrailerLink($link){
+			$pattern = "#^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$#";
+			$matches = array();
+			if(preg_match($pattern, $link, $matches)){
+				return "http://embed.youtube.com/" . $matches[1];
+			}else{
+				return "";
+			}
 		}
 	}
 ?>
