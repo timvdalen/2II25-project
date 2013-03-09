@@ -40,11 +40,11 @@
 		public $trailer_link;
 		
 		function __construct($imdb_id, $dbpedia_id, $title, $poster, $overview){
-			$this->imdb_id;
-			$this->dbpedia_id;
-			$this->title;
-			$this->poster;
-			$this->overview;
+			$this->imdb_id = $imdb_id;
+			$this->dbpedia_id = $dbpedia_id;
+			$this->title = $title;
+			$this->poster = $poster;
+			$this->overview = $overview;
 		}
 	}
 ?>
