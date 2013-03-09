@@ -5,9 +5,9 @@
  * @var array $pages
  */
 $pages = array(
-	new Page("home", "Home", "Home", "/", false),
-	new Page("about", "About", "About", "/about", true),
-	new Page("faq", "F.A.Q.", "FAQ","/faq", true)
+	new Page("home", "Home", "Home", "/", false, true),
+	new Page("about", "About", "About", "/about", true, false),
+	new Page("faq", "F.A.Q.", "FAQ","/faq", true, false)
 	
 );
 
