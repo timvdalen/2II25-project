@@ -39,12 +39,13 @@
 		 */
 		public $trailer_link;
 		
-		function __construct($imdb_id, $dbpedia_id, $title, $poster, $overview){
+		function __construct($imdb_id, $dbpedia_id, $title, $poster, $overview, $trailer_link = ""){
 			$this->imdb_id = $imdb_id;
 			$this->dbpedia_id = $dbpedia_id;
 			$this->title = $title;
 			$this->poster = $poster;
 			$this->overview = $overview;
+			$this->trailer_link = $trailer_link;
 		}
 	}
 ?>
