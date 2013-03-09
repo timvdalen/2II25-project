@@ -11,6 +11,12 @@
 		
 		/**
 		 * Name for this page that is shown in menus
+		 * @var string $name
+		 */
+		public $name;
+
+		/**
+		 * Class name of the View for this Page
 		 * @var string $viewName
 		 */
 		public $viewName;
@@ -28,8 +34,9 @@
 		public $inMenu;
 		
 		
-		function __construct($id, $viewName, $location, $inMenu){
+		function __construct($id, $name, $viewName, $location, $inMenu){
 			$this->id = $id;
+			$this->name = $name;
 			$this->viewName = $viewName;
 			$this->location = $location;
 			$this->inMenu = $inMenu;

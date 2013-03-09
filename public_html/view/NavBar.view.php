@@ -42,7 +42,7 @@ ENDHTML;
 				if(!$page->inMenu){
 					continue;
 				}
-				$content .= "<li><a href='{$page->location}'>{$page->viewName}</a></li>";
+				$content .= "<li><a href='{$page->location}'>{$page->name}</a></li>";
 			}
 
 			$content .= <<<ENDHTML
