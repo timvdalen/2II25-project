@@ -7,10 +7,7 @@
 		 * Frequenty asked questions
 		 * @var array $questions
 		 */
-		private $questions = array(
-			"What is cinetre.es?" => "We don't even know.",
-			"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
-		);
+		private $questions;
 	
 		/*
 		 * Constructs the FAQ page
@@ -18,7 +15,12 @@
 		 * @param array $arguments
 		 *  Contains the arguments for this page
 		 */
-		function __construct($arguments){}
+		function __construct($arguments){
+			$questions = array(
+				"What is cinetre.es?" => "We don't even know.",
+				"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
+			);
+		}
 		
 		/*
 		 * Renders the FAQ page
@@ -31,7 +33,7 @@
 <div class="hero-unit">
 	<h2>F.A.Q.</h2>
 ENDHTML;
-				foreach($questions as $q => $a) {
+				foreach($this->$questions as $q => $a) {
 					$content .= <<<ENDHTML
 	<p> 
 		$q </ br>
