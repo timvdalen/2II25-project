@@ -6,6 +6,7 @@
 	include("view/NavBar.view.php");
 	include("view/Home.view.php");
 	include("view/FAQ.view.php");
+	include("view/About.view.php");
 
 	$page_id = $_GET["page"];
 	if(!($page = get_page($page_id, $pages))){
