@@ -45,4 +45,21 @@ function get_page($id, $pages){
 	return false;
 }
 
+/**
+ * Gets a page title
+ *
+ * @param Page $id
+ *  Page
+ * @retval string
+ *  page title for this page
+ */
+function get_page_title($page, $pages){
+	$site_name = "Cinetrees";
+	if($page == $pages[0]){
+		return $site_name;
+	}else{
+		return $page->name . " &bull; " . $site_name;
+	}
+}
+
 ?>
