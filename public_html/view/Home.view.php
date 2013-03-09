@@ -53,9 +53,9 @@
 		</p>
 ENDHTML;
 			if($this->selected->trailer_link != ""){
-				$content = "<a id='movie-trailer' data-link='{$this->selected->trailer_link}'>Watch trailer</a>";
+				$content .= "<a id='movie-trailer' data-link='{$this->selected->trailer_link}'>Watch trailer</a>";
 			}
-			$content = <<<ENDHTML
+			$content .= <<<ENDHTML
 	</div>
 </div>
 ENDHTML;
