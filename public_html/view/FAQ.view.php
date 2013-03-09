@@ -17,8 +17,13 @@
 		 */
 		function __construct($arguments){
 			$this->questions = array(
-				"What is cinetre.es?" => "We don't even know.",
-				"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it."
+				"What is cinetre.es?" => "Even we are not sure.",
+				"How do I add movies to my cinetree?" => "We're pretty sure there's a button for it.",
+				"Wait, these graphs aren't trees!" => "Not a question. Next please.",
+				"Ehrm, I'm pretty sure these graphs aren't acyclic, why is this site called Cinetrees?"  => "Okay, you got us there. We know the graphs we present aren't trees. But trees sounds much cooler, right? Also, there is not top level domain for grap.hs and .ph is a little over our budget. And how cool are domain names where the TLD is part of the name?",
+				"Do you store all my favorite movies on your servers?" => "No. Processing occurs on our side, but all your data is stored in your browser. If you clear the browser data for this website, your data will be gone.",
+				"Can I access my data from a different computer?" => "You can if you sync your browser storage. If you don't do that, you will just have to import or add everything again.",
+				"Who are you exactly?" => "Check our <a href='/humans.txt'>humans.txt</a> file."
 			);
 		}
 		
