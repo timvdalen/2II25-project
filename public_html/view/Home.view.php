@@ -34,7 +34,8 @@
 			$content = <<<ENDHTML
 <div class = "row-fluid">
 	<div class = "span9">
-
+		<canvas id = "graph"></canvas>
+		<script type=¨text/javascript¨ src=¨assets/js/canvas.js¨></script>
 	</div>
 	<div id = "movie-info" class = "span3 well">
 		<h4>
