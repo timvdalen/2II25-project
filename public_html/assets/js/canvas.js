@@ -92,7 +92,7 @@ $(function(){
 			movie: movie,
 			i: i
 		}, function(e){
-			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50);
+			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
 			nodes.push(node);
 			node.draw(g);
 		});
