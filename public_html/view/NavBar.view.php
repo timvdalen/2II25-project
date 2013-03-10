@@ -1,4 +1,5 @@
 <?php
+	
 	/*
 	 * Outputs the NavBar
 	 */
@@ -14,6 +15,7 @@
 		 */
 		function __construct($items, $active){
 			$this->items = $items;
+			$this->active = $active;
 		}
 		
 		/*
@@ -42,7 +44,11 @@ ENDHTML;
 				if(!$page->inMenu){
 					continue;
 				}
-				$content .= "<li><a href='{$page->location}'>{$page->name}</a></li>";
+				$activemenu = "";
+				if($page == get_page($this->active, $this->items)){
+					$activemenu = " active";
+				}
+				$content .= "<li class='menuitem{$activemenu}'><a href='{$page->location}'>{$page->name}</a></li>";
 			}
 
 			$content .= <<<ENDHTML

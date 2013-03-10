@@ -1,36 +1,56 @@
-function Node(_movie, _img, _x, _y){
+function Node(_movie, _img, _x, _y, _size) {
 	this.movie = _movie;
 	this.image = _img;
 	this.x = _x;
 	this.y = _y;
-	this.size = 50;
-	this.selected = false;
+	this.size = _size;
+	this.mouseover = false;
+	this.degree = 0;
+	this.weight = 0;
 	
-	this.draw = function(g){
-		var color1;
-		if(this.selected){
-			color1 = '#0000FF';
-		}else{
-			color1 = '#000000';
+	this.draw = function(g) {
+		var color;
+		var size;
+		var x;
+		var y;
+		if (this.mouseover) {
+			color = '#AA0000';
+			size = this.size + 12;
+			x = this.x - 12;
+			y = this.y - 12;
+		} else {
+			color = '#000000';
+			size = this.size;
+			x = this.x;
+			y = this.y;
 		}
-		var color2 = '#AA0000';
 
+		g.save();
 		g.beginPath();
-		g.arc(this.x + this.size, this.y + this.size, this.size, 0, 2 * Math.PI);
-		g.fillStyle = color2;
-		g.fill();
-		g.lineWidth = 2;
-		g.strokeStyle = color1;
-		g.stroke();
-		
-		var image_x = this.x + this.size/2;
-		var image_y = this.y + this.size/4;
+		g.arc(x + size, y + size, size, 0, 2 * Math.PI);
+		g.closePath();
+
 		var ratio = this.image.height/this.image.width;
 		
-		g.drawImage(this.image, image_x, image_y, this.size, this.size*ratio);
+		g.clip();
+		g.drawImage(this.image, x, y, size*2, size*ratio*2);
+		g.beginPath();
+		g.arc(x + size, y + size, size, 0, 2 * Math.PI);
+		g.clip();
+		g.lineWidth = 6;
+		g.strokeStyle = color;
+		g.stroke();
+		g.closePath();
+		g.restore();
 	}
 	
-	this.inBounds = function(x, y){
+	this.inBounds = function(x, y) {
 		return (x >= this.x && x <= (this.x + this.size*2) && y >= this.y && y <= (this.y + this.size*2));
 	}
+	
+	/*this.inBounds = function(x, y) {
+		var dx = x - this.x;
+		var dy = y - this.y;
+		return Math.sqrt(dx*dx + dy*dy);
+	}*/
 }
