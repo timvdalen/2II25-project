@@ -18,7 +18,7 @@ function drawNode(g, x, y, size, weight) {
 $(function(){
 	var canvas = $("#graph")[0];
 	 var width = $("#graph").width();
-	 var heigh = $("#graph").height();
+	 var height = $("#graph").height();
 	
 	canvas.width = width
 	canvas.height = height
