@@ -43,11 +43,11 @@ function graphMove(e){
 	var loc = getCursorPosition(e);
 	var node = findNode(loc.x, loc.y);
 	if(node != null){
-		node.selected = true;
+		node.mouseover = true;
 		render();
 	}else{
 		for(var i=0; i<nodes.length; i++){
-			nodes[i].selected = false;
+			nodes[i].mouseover = false;
 		}
 		render();
 	}
@@ -62,6 +62,11 @@ function graphClick(e){
 }
 
 function render(){
+	g.save();
+	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
+	g.clearRect(0, 0, canvas.width, canvas.height);
+	g.restore();
+	
 	for(var i=0; i<nodes.length; i++){
 		nodes[i].draw(g);
 	}
