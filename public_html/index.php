@@ -38,6 +38,8 @@
         </style>
         <link rel="stylesheet" href="assets/css/bootstrap-responsive.min.css">
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/select2.css">
+		<link rel="stylesheet" href="assets/css/select-movie.css">
         <link rel="stylesheet" href="assets/css/main.css">
 
         <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>

@@ -37,7 +37,7 @@
 			$this->selected[] = new Movie("tt3", 0, 
 				"Skyfall (2012)", 
 				"http://trakt.us/images/posters_movies/178140.5.jpg", 
-				"Daniel Craig is back as James Bond 007 in SKYFALL, the 23rd adventure in the longest-running film franchise of all time.  In Skyfall, Bond’s loyalty to M (Judi Dench) is tested as her past comes back to haunt her.  As MI6 comes under attack, 007 must track down and destroy the threat, no matter how personal the cost.",
+				"Daniel Craig is back as James Bond 007 in SKYFALL, the 23rd adventure in the longest-running film franchise of all time.  In Skyfall, Bond's loyalty to M (Judi Dench) is tested as her past comes back to haunt her.  As MI6 comes under attack, 007 must track down and destroy the threat, no matter how personal the cost.",
 				"http://youtube.com/watch?v=6kw1UVovByw");
 		}
 		
@@ -53,8 +53,13 @@
 			$content = <<<ENDHTML
 <div class="row-fluid">
 	<div id="main-pane" class="span9">
+		<div id="movie-controls">
+			<a id="btn-add-movie" class="btn btn-success pull-right"><i class="icon-plus icon-large"></i>Add</a>
+			<input id="add-movie-input" type="hidden" style="width: 40%;">
+		</div>
 		<canvas id="graph"></canvas>
 		<iframe id="embed" seamless></iframe>
+		<script type="text/javascript" src="assets/js/Movie.class.js"></script>
 		<script type="text/javascript" src="assets/js/Node.class.js"></script>
 		<script type="text/javascript" src="assets/js/canvas.js"></script>
 	</div>
@@ -74,6 +79,7 @@ ENDHTML;
 			$content .= "var movies = " . json_encode($this->selected) . ";";
 			$content .= <<<ENDHTML
 </script>
+<script src="assets/js/movie-select.js"></script>
 <div id="images_preload"></div>
 ENDHTML;
 
