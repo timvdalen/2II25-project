@@ -17,8 +17,11 @@ function drawNode(g, x, y, size, weight) {
 
 $(function(){
 	var canvas = $("#graph")[0];
-	canvas.width = $("#graph").width();
-	canvas.height = $("#graph").height();
+	 var width = $("#graph").width();
+	 var heigh = $("#graph").height();
+	
+	canvas.width = width
+	canvas.height = height
 
 	var g = canvas.getContext("2d");
 
