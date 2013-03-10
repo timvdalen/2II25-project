@@ -1,27 +1,105 @@
-function Node() {
-	
+var nodes = [];
+var canvas;
+var g;
+
+function showMovie(movie){
+	$("#movie-title").text(movie.title);
+	$("#movie-image").attr("src", movie.poster);
+	$("#movie-overview").text(movie.overview);
+	if(movie.trailer_link != ""){
+		$("#movie-trailer").data("link", movie.trailer_link).text("Watch trailer").show();
+	}else{
+		$("#movie-trailer").hide();
+	}
 }
 
-function drawNode(x, y, size, weight) {
-	var color1 = '#000000';
-	var color2 = '#AA0000';
+function getCursorPosition(e) {
+	var x;
+	var y;
+	if(e.pageX != undefined && e.pageY != undefined){
+		x = e.pageX;
+		y = e.pageY;
+	}else{
+		x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+		y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+	}
+	x -= canvas.offsetLeft;
+	y -= canvas.offsetTop;
+	
+	return {x: x, y: y};
+}
 
-	g.beginPath();
-	g.arc(x, y, size, 0, 2 * Math.PI, false);
-	g.fillStyle = weight * color1 + (1-weight) * color2;
-	g.fill();
-	g.lineWidth = 2;
-	g.strokeStyle = color1;
-	g.stroke();
+function findNode(x, y){
+	for(var i=0; i<nodes.length; i++){
+		var node = nodes[i];
+		if(node.inBounds(x, y)){
+			return node;
+		}
+	}
+	return null;
+}
+
+function graphMove(e){
+	var loc = getCursorPosition(e);
+	var node = findNode(loc.x, loc.y);
+	if(node != null){
+		node.selected = true;
+		render();
+	}else{
+		for(var i=0; i<nodes.length; i++){
+			nodes[i].selected = false;
+		}
+		render();
+	}
+}
+
+function graphClick(e){
+	var loc = getCursorPosition(e);
+	var node = findNode(loc.x, loc.y);
+	if(node != null){
+		showMovie(node.movie);
+	}
+}
+
+function render(){
+	for(var i=0; i<nodes.length; i++){
+		nodes[i].draw(g);
+	}
 }
 
 $(function(){
-	var canvas = $("#graph")[0];
-	canvas.width = $("#graph").width();
-	canvas.height = $("#graph").height();
+	canvas = $("#graph")[0];
+	var width = $("#graph").width();
+	var height = $("#graph").height();
+	
+	canvas.width = width;
+	canvas.height = height;
 
-	var g = canvas.getContext("2d");
+	g = canvas.getContext("2d");
 
 	g.font = "30px Arial"
-	g.fillText($("#graph").width(), 10, 10);
+	g.fillText(canvas.width, 10, 40);
+	g.fillText(canvas.height, 100, 40);
+	
+	
+	for(var i=0; i<movies.length; i++){
+		var movie = movies[i];
+		var img = jQuery("<img>").attr("src", movie.poster).load({
+			movie: movie,
+			i: i
+		}, function(e){
+			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50);
+			nodes.push(node);
+			node.draw(g);
+		});
+		$("#images_preload").append(img);
+	}
+	
+	showMovie(movies[0]);
+	
+	$("#graph").click(graphClick);
+	$("#graph").mousemove(graphMove);
 });
+
+
+
