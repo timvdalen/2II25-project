@@ -60,6 +60,7 @@
         </div> <!-- /container -->
 
         <script src="assets/js/vendor/bootstrap.min.js"></script>
+		<script src="assets/js/vendor/select2.min.js"></script>
 
         <script src="assets/js/main.js"></script>
 
