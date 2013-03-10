@@ -81,7 +81,6 @@ $(function(){
 	g.fillText(canvas.width, 10, 40);
 	g.fillText(canvas.height, 100, 40);
 	
-	
 	for(var i=0; i<movies.length; i++){
 		var movie = movies[i];
 		var img = jQuery("<img>").attr("src", movie.poster).load({
@@ -100,6 +99,3 @@ $(function(){
 	$("#graph").click(graphClick);
 	$("#graph").mousemove(graphMove);
 });
-
-
-
