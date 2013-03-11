@@ -1,4 +1,5 @@
 var nodes = [];
+var edges = [];
 var canvas;
 var g;
 
@@ -39,8 +40,19 @@ function findNode(x, y){
 	return null;
 }
 
+function findEdge(x, y){
+	for(var i=0; i<edges.length; i++){
+		var edge = edges[i];
+		if(edge.inBounds(x, y)){
+			return edge;
+		}
+	}
+	return null;
+}
+
 function graphMove(e){
 	var loc = getCursorPosition(e);
+	
 	var node = findNode(loc.x, loc.y);
 	if(node != null){
 		node.mouseover = true;
@@ -48,6 +60,17 @@ function graphMove(e){
 	}else{
 		for(var i=0; i<nodes.length; i++){
 			nodes[i].mouseover = false;
+		}
+		render();
+	}
+	
+	var node = findEdge(loc.x, loc.y);
+	if(edge != null){
+		edge.mouseover = true;
+		render();
+	}else{
+		for(var i=0; i<edges.length; i++){
+			edges[i].mouseover = false;
 		}
 		render();
 	}
@@ -69,6 +92,10 @@ function render(){
 	
 	for(var i=0; i<nodes.length; i++){
 		nodes[i].draw(g);
+	}
+	
+	for(var i=0; i<edges.length; i++){
+		edges[i].draw(g);
 	}
 }
 
