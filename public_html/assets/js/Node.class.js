@@ -51,6 +51,6 @@ function Node(_movie, _img, _x, _y, _size) {
 	this.inBounds = function(x, y) {
 		var dx = x - this.x;
 		var dy = y - this.y;
-		return (size > Math.sqrt(dx*dx + dy*dy));
+		return (this.size > Math.sqrt(dx*dx + dy*dy));
 	}
 }
