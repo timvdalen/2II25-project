@@ -16,8 +16,8 @@ function Node(_movie, _img, _x, _y, _size) {
 		if (this.mouseover) {
 			color = '#AA0000';
 			size = this.size + 12;
-			x = this.x - size - 12;
-			y = this.y - size - 12;
+			x = this.x - size;
+			y = this.y - size;
 		} else {
 			color = '#000000';
 			size = this.size;
