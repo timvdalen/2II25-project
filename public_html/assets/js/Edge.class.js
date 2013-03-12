@@ -4,6 +4,11 @@ function Edge(_node1, _node2, _weight) {
 	this.mouseover = false;
 	this.weight = _weight;
 	
+	this.node1.degree++;
+	this.node1.weight += this.weight;
+	this.node2.degree++;
+	this.node1.weight += this.weight;
+	
 	this.draw = function(g) {
 		var color;
 		var size;
@@ -48,6 +53,6 @@ function Edge(_node1, _node2, _weight) {
 		b = y1 - dydx * x1;
 		f = dydx * x0 + b;
 		
-		return x1 < x0 && x0 <x2 && abs(f - y0) < 3; // 3 kan nog afhankelijk van dydx
+		return x1 < x0 && x0 <x2 && Math.abs(f - y0) < 3; // 3 kan nog afhankelijk van dydx
 	}
 }

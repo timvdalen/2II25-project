@@ -1,5 +1,5 @@
-var nodes = [];
-var edges = [];
+//var nodes = [];
+//var edges = [];
 var canvas;
 var g;
 var graph;
@@ -91,17 +91,12 @@ function render(){
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
 	
-	for(var i=0; i<nodes.length; i++){
-		nodes[i].draw(g);
-	}
-	
-	for(var i=0; i<edges.length; i++){
-		edges[i].draw(g);
-	}
+	graph.draw(g);
 }
 
 $(function(){
 	canvas = $("#graph")[0];
+	
 	var width = $("#graph").width();
 	var height = $("#graph").height();
 	
@@ -122,10 +117,15 @@ $(function(){
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
 			nodes.push(node);
-			node.draw(g);
+			if (nodes.length > 1) {
+				edges.push(new Edge(node, nodes[0], 3));
+			}
+			graph.reconstruct();
 		});
 		$("#images_preload").append(img);
 	}
+	
+	graph = new Graph();
 	
 	showMovie(movies[0]);
 	

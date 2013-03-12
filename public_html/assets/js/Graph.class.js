@@ -1,5 +1,5 @@
-//var nodes = [];
-//var edges = [];
+var nodes = [];
+var edges = [];
 
 // returns an edge filter
 function linksto(node) {
@@ -62,12 +62,14 @@ function processNode(_node, _parent, _neighbours) {
 	while (todo.length > 0) {
 		// assign positions to neighbouring nodes, as far away from the parent -> hub connection
 		node = todo.pop();
-		edgelength = node.degree * 50;
-		angle += step;
-		// set position
-		var pos = getCoordinates(angle, edgelength);
-		node.x = _parent.x + pos[0];
-		node.y = _parent.y + pos[1];
+		if (node != _parent) {
+			edgelength = node.degree * 50;
+			angle += step;
+			// set position
+			var pos = getCoordinates(angle, edgelength);
+			node.x = _parent.x + pos[0];
+			node.y = _parent.y + pos[1];
+		}
 	}
 }
 
@@ -93,6 +95,8 @@ function Graph() {
 		var todo = nodes.slice(0);
 		var root = todo.pop();
 		
+		console.log(todo);
+		
 		root.x = canvas.width / 2;
 		root.y = canvas.width / 2;
 		
@@ -106,7 +110,7 @@ function Graph() {
 		} 
 	}
 	
-	this.reconstruct();
+	//this.reconstruct();
 	
 	this.draw = function(g) {		
 		for(var i = 0; i < edges.length; i++) {
