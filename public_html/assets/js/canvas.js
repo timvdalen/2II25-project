@@ -1,5 +1,3 @@
-//var nodes = [];
-//var edges = [];
 var canvas;
 var g;
 var graph;
@@ -33,8 +31,8 @@ function getCursorPosition(e) {
 }
 
 function findNode(x, y){
-	for(var i=0; i<nodes.length; i++){
-		var node = nodes[i];
+	for(var i=0; i<graph.nodes.length; i++){
+		var node = graph.nodes[i];
 		if(node.inBounds(x, y)){
 			return node;
 		}
@@ -43,8 +41,8 @@ function findNode(x, y){
 }
 
 function findEdge(x, y){
-	for(var i=0; i<edges.length; i++){
-		var edge = edges[i];
+	for(var i=0; i<graph.edges.length; i++){
+		var edge = graph.edges[i];
 		if(edge.inBounds(x, y)){
 			return edge;
 		}
@@ -60,8 +58,8 @@ function graphMove(e){
 		node.mouseover = true;
 		render();
 	}else{
-		for(var i=0; i<nodes.length; i++){
-			nodes[i].mouseover = false;
+		for(var i=0; i<graph.nodes.length; i++){
+			graph.nodes[i].mouseover = false;
 		}
 		render();
 	}
@@ -71,8 +69,8 @@ function graphMove(e){
 		edge.mouseover = true;
 		render();
 	}else{
-		for(var i=0; i<edges.length; i++){
-			edges[i].mouseover = false;
+		for(var i=0; i<graph.edges.length; i++){
+			graph.edges[i].mouseover = false;
 		}
 		render();
 	}
@@ -92,7 +90,7 @@ function render(){
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
 	
-	graph.draw(g);
+	if (graph != null) graph.draw(g);
 }
 
 function initCanvas(){
@@ -109,6 +107,8 @@ function initCanvas(){
 
 $(function(){
 	canvas = $("#graph")[0];
+	
+	graph = new Graph();
 
 	initCanvas();
 
@@ -119,16 +119,14 @@ $(function(){
 			i: i
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
-			nodes.push(node);
-			if (nodes.length > 1) {
-				edges.push(new Edge(node, nodes[0], 3));
+			graph.nodes.push(node);
+			if (graph.nodes.length > 1) {
+				graph.edges.push(new Edge(node, graph.nodes[0], 3));
 			}
 			graph.reconstruct();
 		});
 		$("#images_preload").append(img);
 	}
-	
-	graph = new Graph();
 	
 	showMovie(movies[0]);
 	

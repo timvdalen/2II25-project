@@ -1,6 +1,3 @@
-var nodes = [];
-var edges = [];
-
 // returns an edge filter
 function linksto(node) {
 	function links(element, index, array) {
@@ -63,7 +60,7 @@ function processNode(_node, _parent, _neighbours) {
 		// assign positions to neighbouring nodes, as far away from the parent -> hub connection
 		node = todo.pop();
 		if (node != _parent) {
-			edgelength = node.degree * 50;
+			edgelength = node.degree * 20;
 			angle += step;
 			// set position
 			var pos = getCoordinates(angle, edgelength);
@@ -77,7 +74,7 @@ var todo;
 
 function processBranch(node, parent) {
 	if (todo.length > 0) {
-		links = edges.filter(linksto(node));
+		links = graph.edges.filter(linksto(node));
 		neighbours = todo.filter(linkedto(node, links));
 		for (var i = 0; i < neighbours.length; i++) {
 			processNode(node, parent, neighbours);
@@ -89,19 +86,22 @@ function processBranch(node, parent) {
 }
 
 function Graph() {
+	this.nodes = [];
+	this.edges = [];
+
 	this.reconstruct = function() {
-		nodes.sort(compareNodes);
+		this.nodes.sort(compareNodes);
 		
-		var todo = nodes.slice(0);
+		var todo = this.nodes.slice(0);
 		var root = todo.pop();
 		
 		console.log(todo);
 		
 		root.x = canvas.width / 2;
-		root.y = canvas.width / 2;
+		root.y = canvas.height / 2;
 		
 		if (todo.length > 0) {
-			links = edges.filter(linksto(root));
+			links = this.edges.filter(linksto(root));
 			neighbours = todo.filter(linkedto(root, links));
 			for (var i = 0; i < neighbours.length; i++) {
 				processNode(root, null, neighbours);
@@ -113,12 +113,12 @@ function Graph() {
 	//this.reconstruct();
 	
 	this.draw = function(g) {		
-		for(var i = 0; i < edges.length; i++) {
-			edges[i].draw(g);
+		for(var i = 0; i < this.edges.length; i++) {
+			this.edges[i].draw(g);
 		}
 		
-		for(var i = 0; i < nodes.length; i++) {
-			nodes[i].draw(g);
+		for(var i = 0; i < this.nodes.length; i++) {
+			this.nodes[i].draw(g);
 		}
 	}
 }
