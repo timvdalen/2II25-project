@@ -13,6 +13,7 @@ function showMovie(movie){
 	}else{
 		$("#movie-trailer").hide();
 	}
+	initCanvas();
 }
 
 function getCursorPosition(e) {
@@ -94,9 +95,7 @@ function render(){
 	graph.draw(g);
 }
 
-$(function(){
-	canvas = $("#graph")[0];
-	
+function initCanvas(){
 	var width = $("#graph").width();
 	var height = $("#graph").height();
 	
@@ -105,10 +104,14 @@ $(function(){
 
 	g = canvas.getContext("2d");
 
-	g.font = "30px Arial"
-	g.fillText(canvas.width, 10, 40);
-	g.fillText(canvas.height, 100, 40);
-	
+	render();
+}
+
+$(function(){
+	canvas = $("#graph")[0];
+
+	initCanvas();
+
 	for(var i=0; i<movies.length; i++){
 		var movie = movies[i];
 		var img = jQuery("<img>").attr("src", movie.poster).load({
@@ -131,4 +134,5 @@ $(function(){
 	
 	$("#graph").click(graphClick);
 	$("#graph").mousemove(graphMove);
+	$(window).resize(initCanvas);
 });
