@@ -43,14 +43,14 @@ function Node(_movie, _img, _x, _y, _size) {
 		g.closePath();
 		g.restore();
 	}
-	
+	/*
 	this.inBounds = function(x, y) {
 		return (x >= this.x && x <= (this.x + this.size*2) && y >= this.y && y <= (this.y + this.size*2));
-	}
+	}*/
 	
-	/*this.inBounds = function(x, y) {
+	this.inBounds = function(x, y) {
 		var dx = x - this.x;
 		var dy = y - this.y;
-		return Math.sqrt(dx*dx + dy*dy);
-	}*/
+		return (size > Math.sqrt(dx*dx + dy*dy));
+	}
 }
