@@ -57,5 +57,45 @@
 				return "";
 			}
 		}
+		
+		/**
+		 * converts movie from trakt format to dbpedia format
+		 * @retval string title of the movie in dbpedia format
+		 */
+		public function getDbpedia(){
+		    $safetitle = urlencode($this->title);
+			$url = "http://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch={$safetitle}%20movie";
+			$options = array(
+				'http'=>array(
+					'method'=>"GET",
+					'header'=>"Accept-language: en\r\n" .
+						"User-Agent:Cinetrees Movie bot\r\n"
+				)
+			);
+
+			$context = stream_context_create($options);
+			$return = json_decode(file_get_contents($url, false, $context));
+			
+			$result = $return->query->search[0]->title;
+			$result = str_replace(" ","_",$result);
+			return $result;
+		}
+		
+		/**
+		 * converts movie from dbpedia format to trakt format
+		 * @var string $dbpedia_title title of the movie in dbpedia format
+		 * @retval string title of the movie in trakt format
+		 */
+		public static function getTrakt($dbpedia_title){
+			//$dbpedia_title = str_replace("_","-",$dbpedia_title);
+			$pos = strpos($dbpedia_title,"(");
+			if( !($pos === false) ){
+				$dbpedia_title = substr($dbpedia_title,0,$pos);
+			}
+			$url = "http://api.trakt.tv/search/movies.json/dd868458ec3ebcd4febd914e40dde1e3/$dbpedia_title";
+			$data = json_decode(file_get_contents($url));
+			$result = $data[0];
+			return new Movie($result->imdb_id, "", $result->title . " (" . $result->year . ")", $result->images->poster, $result->overview, $result->trailer);				
+		}
 	}
 ?>
