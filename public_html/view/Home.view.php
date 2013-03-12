@@ -61,6 +61,7 @@
 		<iframe id="embed" seamless></iframe>
 		<script type="text/javascript" src="assets/js/Movie.class.js"></script>
 		<script type="text/javascript" src="assets/js/Node.class.js"></script>
+		<script type="text/javascript" src="assets/js/Graph.class.js"></script>
 		<script type="text/javascript" src="assets/js/canvas.js"></script>
 	</div>
 	<div id="movie-info" class="span3 well">

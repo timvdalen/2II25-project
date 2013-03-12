@@ -4,7 +4,7 @@
 // returns an edge filter
 function linksto(node) {
 	function links(element, index, array) {
-		return (node == element.moviea || node == element.movieb);
+		return (node == element.node1 || node == element.node2);
 	}
 	return links;
 } 
@@ -14,7 +14,7 @@ function linkedto(node, links) {
 	function linked(element, index, array) {
 		var link = false;
 		for (int i = 0; i < links.length; i++) {
-			if (element != node && (element == links[i].moviea || element == links[i].movieb)) link = true;
+			if (element != node && (element == links[i].node1 || element == links[i].node2)) link = true;
 		}
 		return link;
 	}
