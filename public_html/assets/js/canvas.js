@@ -64,7 +64,7 @@ function graphMove(e){
 		render();
 	}
 	
-	var node = findEdge(loc.x, loc.y);
+	var edge = findEdge(loc.x, loc.y);
 	if(edge != null){
 		edge.mouseover = true;
 		render();
