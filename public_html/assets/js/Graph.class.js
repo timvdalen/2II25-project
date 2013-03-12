@@ -13,7 +13,7 @@ function linksto(node) {
 function linkedto(node, links) {
 	function linked(element, index, array) {
 		var link = false;
-		for (int i = 0; i < links.length; i++) {
+		for (var i = 0; i < links.length; i++) {
 			if (element != node && (element == links[i].node1 || element == links[i].node2)) link = true;
 		}
 		return link;
@@ -32,7 +32,7 @@ function compareNodes(a, b) {
 		} else if (a.weight > b.weight) {
 			return -1;
 		} else {
-			return = 0;
+			return 0;
 		}
 	}
 }
@@ -56,7 +56,7 @@ function processNode(_node, _parent, _neighbours) {
 	var root = true;
 	if (_parent != null) {
 		root = false;
-		angle = getAngle(hub.x, hub.y, _parent.x, _parent.y;
+		angle = getAngle(hub.x, hub.y, _parent.x, _parent.y);
 	}
 	var step = (2 * Math.PI) / _node.degree;
 	while (todo.length > 0) {

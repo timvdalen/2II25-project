@@ -2,6 +2,7 @@ var nodes = [];
 var edges = [];
 var canvas;
 var g;
+var graph;
 
 function showMovie(movie){
 	$("#movie-title").text(movie.title);
