@@ -40,9 +40,11 @@ $(function(){
 		var img = jQuery("<img>").attr("src", data.poster).load({
 			movie: data,
 		}, function(e){
-			var node = new Node(e.data.movie, $(this)[0], 200, 200, 50);
-			nodes.push(node);
-			node.draw(g);
+			var node = new Node(e.data.movie, $(this)[0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
+			graph.nodes.push(node);
+			graph.edges.push(new Edge(node, graph.nodes[0], 3));
+			graph.reconstruct()
+			render();
 		});
 		$("#images_preload").append(img);
 	});
