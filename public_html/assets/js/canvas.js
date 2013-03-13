@@ -124,6 +124,7 @@ $(function(){
 				graph.edges.push(new Edge(node, graph.nodes[0], 3));
 			}
 			graph.reconstruct();
+			render();
 		});
 		$("#images_preload").append(img);
 	}
