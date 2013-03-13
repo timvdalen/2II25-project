@@ -54,7 +54,14 @@
 <div class="row-fluid">
 	<div id="main-pane" class="span9">
 		<div id="movie-controls">
-			<a id="btn-add-movie" class="btn btn-success pull-right"><i class="icon-plus icon-large"></i>Add</a>
+			<div class="btn-group pull-right">
+                <button id="btn-add-movie" class="btn btn-success"><i class="icon-plus icon-large"></i>Add</button>
+                <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-import-facebook"><i class="icon-facebook-sign"></i> From Facebook</a></li>
+				  <li><a id="btn-import-trakt"><i class="icon-film"></i> From Trakt.tv</a></li>
+                </ul>
+              </div>
 			<input id="add-movie-input" type="hidden" style="width: 40%;">
 		</div>
 		<canvas id="graph"></canvas>
