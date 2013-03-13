@@ -1,6 +1,4 @@
 <?php
-	include("model/Movie.class.php");
-
 	/*
 	 * Outputs the main page
 	 */
@@ -58,8 +56,8 @@
                 <button id="btn-add-movie" class="btn btn-success"><i class="icon-plus icon-large"></i>Add</button>
                 <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li><a id="btn-import-facebook"><i class="icon-facebook-sign"></i> From Facebook</a></li>
-				  <li><a id="btn-import-trakt"><i class="icon-film"></i> From Trakt.tv</a></li>
+                  <li><a id="btn-import-facebook" href="#importerModal" data-toggle="modal"><i class="icon-facebook-sign"></i> From Facebook</a></li>
+				  <li><a id="btn-import-trakt" href="#importerModal" data-toggle="modal"><i class="icon-film"></i> From Trakt.tv</a></li>
                 </ul>
               </div>
 			<input id="add-movie-input" type="hidden" style="width: 40%;">
@@ -91,6 +89,8 @@ ENDHTML;
 <script src="assets/js/movie-select.js"></script>
 <div id="images_preload"></div>
 ENDHTML;
+			$modal = new ImporterModal(array());
+			$content .= $modal->render();
 
 			return $content;
 		}
