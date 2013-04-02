@@ -84,7 +84,7 @@
 		/**
 		 * converts movie from dbpedia format to trakt format
 		 * @var string $dbpedia_title title of the movie in dbpedia format
-		 * @retval string title of the movie in trakt format
+		 * @retval Movie the movie in trakt format
 		 */
 		public static function getTrakt($dbpedia_title){
 			//$dbpedia_title = str_replace("_","-",$dbpedia_title);
