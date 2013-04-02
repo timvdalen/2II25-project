@@ -27,6 +27,12 @@
 		 */
 		public $description;
 		
+		/**
+		 * Object of the relation
+		 * @var string $object
+		 */
+		public $object;
+		
 		function __construct($id, $weight, $type, $description){
 			$this->id = $id;
 			$this->weight = $weight;
