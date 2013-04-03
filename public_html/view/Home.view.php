@@ -47,6 +47,10 @@
 		 */
 		public function render(){
 			$selected = $this->selected[0];
+			
+			$modals = array();
+			$modals[] = new FacebookImporter(array());
+			$modals[] = new TraktImporter(array());
 		
 			$content = <<<ENDHTML
 <div class="row-fluid">
@@ -56,8 +60,13 @@
                 <button id="btn-add-movie" class="btn btn-success"><i id="btn-add-movie-icon" class="icon-plus icon-large"></i>Add</button>
                 <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li><a id="btn-import-facebook" href="#importerModal" data-toggle="modal"><i class="icon-facebook-sign"></i> From Facebook</a></li>
-				  <li><a id="btn-import-trakt" href="#importerModal" data-toggle="modal"><i class="icon-film"></i> From Trakt.tv</a></li>
+ENDHTML;
+
+			foreach($modals as $modal){
+				$content .= $modal->renderButton();
+			}
+
+			$content .= <<<ENDHTML
                 </ul>
               </div>
 			<input id="add-movie-input" type="hidden" style="width: 40%;">
@@ -89,8 +98,10 @@ ENDHTML;
 <script src="assets/js/movie-select.js"></script>
 <div id="images_preload"></div>
 ENDHTML;
-			$modal = new ImporterModal(array());
-			$content .= $modal->render();
+			
+			foreach($modals as $modal){
+				$content .= $modal->render();
+			}
 
 			return $content;
 		}

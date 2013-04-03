@@ -6,6 +6,8 @@
 	include("model/Movie.class.php");
 	include("view/NavBar.view.php");
 	include("view/ImporterModal.view.php");
+	include("view/Facebook.importer.view.php");
+	include("view/Trakt.importer.view.php");
 	include("view/Home.view.php");
 	include("view/FAQ.view.php");
 	include("view/About.view.php");
