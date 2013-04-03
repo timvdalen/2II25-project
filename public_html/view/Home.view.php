@@ -53,7 +53,7 @@
 	<div id="main-pane" class="span9">
 		<div id="movie-controls">
 			<div class="btn-group pull-right">
-                <button id="btn-add-movie" class="btn btn-success"><i class="icon-plus icon-large"></i>Add</button>
+                <button id="btn-add-movie" class="btn btn-success"><i id="btn-add-movie-icon" class="icon-plus icon-large"></i>Add</button>
                 <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                 <ul class="dropdown-menu">
                   <li><a id="btn-import-facebook" href="#importerModal" data-toggle="modal"><i class="icon-facebook-sign"></i> From Facebook</a></li>

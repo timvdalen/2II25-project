@@ -45,7 +45,7 @@ $result = sparqlQuery($query, "http://dbpedia.org/sparql");
 
 $relations = array();
 foreach($result->results->bindings as $row){
-	if(count($relations) >= 10){
+	if(count($relations) >= 3){
 		break;
 	}
 	$r = MoviesRelation::getRelation($row->rel->value);
