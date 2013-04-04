@@ -65,7 +65,7 @@ function Ring(_root, _level, _previousring) {
 	this.r = ringr(this.level);
 	this.previousring = _previousring;
 	
-	this.ringr(lvl) {
+	this.ringr = function(lvl) {
 		return (lvl * 80);
 	}
 	

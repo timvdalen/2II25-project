@@ -119,11 +119,17 @@ $(function(){
 			i: i
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
-			graph.nodes.push(node);
+			graph.addnode(node);
+			if (graph.nodes.length > 1) {
+				graph.addedge(new Edge(node, graph.nodes[0], 3));
+			}
+			graph.fix(node);
+			
+			/*graph.nodes.push(node);
 			if (graph.nodes.length > 1) {
 				graph.edges.push(new Edge(node, graph.nodes[0], 3));
 			}
-			graph.reconstruct();
+			graph.reconstruct();*/
 			render();
 		});
 		$("#images_preload").append(img);

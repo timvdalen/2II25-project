@@ -58,36 +58,49 @@ function Graph() {
 	
 	var todo;
 
-	this.order() {
+	this.order = function() {
 		this.nodes.sort(compareNodes);
 		todo = this.nodes.slice(0);
 	}
 	
 	this.addnode = function(node) {
-		nodes.push(node);
-		trees.push(new Tree(node, treeids.length);
-		treeids.push(trees.length-1); //trees[treeids[i]] will yield the tree with id i.
+		this.nodes.push(node);
+		this.trees.push(new Tree(node, this.treeids.length, this.trees));
+		this.treeids.push(this.trees.length-1); //trees[treeids[i]] will yield the tree with id i.
+		node.treeid = this.trees.length-1;
 	}
 	
 	this.addedge = function(edge) {
-		edges.push(edge);
-		var atree = trees[treeids[edge.node1.treeid]];
-		var btree = trees[treeids[edge.node2.treeid]];
+		this.edges.push(edge);
+		var atree = this.trees[this.treeids[edge.node1.treeid]];
+		var btree = this.trees[this.treeids[edge.node2.treeid]];
 		if (atree.nodes.length >= btree.nodes.length) {
 			var merge = atree.add(edge);
-			if (merge != -1) deletetree(merge);
+			if (merge != -1) this.deletetree(merge);
+			console.log(merge);
 		} else /*if (atree.nodes.length < btree.nodes.length)*/ {
 			var merge = btree.add(edge);
-			if (merge != -1) deletetree(merge);
+			if (merge != -1) this.deletetree(merge);
+			console.log(merge);
 		}
 	}
 	
 	this.deletetree = function(treeid) {
-		for (var i = treeid; i < trees.length-1; i++) {
-			trees[i] = trees[i+1];
-			treeids[trees[i].treeid] = i;
+		for (var i = treeid; i < this.trees.length-1; i++) {
+			this.trees[i] = this.trees[i+1];
+			this.treeids[trees[i].treeid] = i;
 		}
-		trees.pop();
+		this.trees.pop();
+	}
+	
+	this.fix = function(node) {
+		// assign positions to a nodes tree
+		console.log(node.treeid);
+		console.log(this.treeids[node.treeid]);
+		console.log(this.trees[this.treeids[node.treeid]]);
+		v = new Visualisation(this.trees[this.treeids[node.treeid]].root)
+		console.log(this.trees[this.treeids[node.treeid]].nodes);
+		v.update();
 	}
 	
 	this.draw = function(g) {	

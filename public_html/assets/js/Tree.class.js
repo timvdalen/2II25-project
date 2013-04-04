@@ -35,32 +35,39 @@ function compareNodes(a, b) {
 	}
 }
 
-function Tree(node, _treeid) {
+function Tree(node, _treeid, trees) {
 	this.root = node;
 	this.treeid = _treeid;
 	this.nodes = [];		// may be depricated later
 	this.nodes.push(node);// may be depricated later
 	this.edges = [];
+	this.othertrees = trees;
 	
-	this.add(edge) {
-		if (edge.node1.treeid == this.id) {
-			if (edge.node2.treeid == this.id) {
+	this.add = function(edge) {
+		if (edge.node1.treeid == this.treeid) {
+			if (edge.node2.treeid == this.treeid) {
+				console.log("internal");
 				//internal edge
 				edges.push(edge);
 				return -1; //no tree should be removed
 			} else {
+				console.log("node1 old");
 				newnode = edge.node2;
 				oldnode = edge.node1;
 				return this.attach(oldnode, newnode);
 				//toch return newnode.treeid; //tree of the newnode is merged with this one and can be removed
 			}
 		}
-		else if (edge.node2.treeid == this.id) {
+		else if (edge.node2.treeid == this.treeid) {
+			console.log("node2 old");
 			newnode = edge.node1;
 			oldnode = edge.node2;
 			return this.attach(oldnode, newnode);
 			//return newnode.treeid; //tree of the newnode is merged with this one and can be removed
 		} else {
+			console.log("edgenode1: " + edge.node1.treeid);
+			console.log("edgenode2: " + edge.node2.treeid);
+			console.log("this.treeid: " + this.treeid);
 			// edge is not part of this tree
 			return -1; //this tree is not changed and should not affect other trees.
 		}
@@ -68,7 +75,7 @@ function Tree(node, _treeid) {
 	
 	this.rootify = function(parent, child) {
 		// set child node as new root node of it's own subtree
-		var links = (trees[child.treeid]).edges.filter(linksto(child));
+		var links = (this.othertrees[child.treeid]).edges.filter(linksto(child));
 		var neighbours = (this.nodes.slice(0)).filter(linkedto(parent, links));
 		for (var i = 0; i < neighbours.length; i++) {
 			if (neighbours[i] == parent) neighbours.splice(index, 1);//remove parent
@@ -87,8 +94,9 @@ function Tree(node, _treeid) {
 	}
 	
 	this.addsubtree = function(node) {
-		nodes.push(node);
-		node.treeid = treeid;
+		this.nodes.push(node);
+		node.treeid = this.treeid;
+		console.log("---" + this.treeid);
 		for (var i = 0; i < node.children.length; i++) {
 			this.addsubtree(node.children[i]);
 		}
@@ -100,6 +108,7 @@ function Tree(node, _treeid) {
 		this.rootify(oldnode, newnode);
 		
 		// add nodes to this tree 
+		console.log(oldnode.treeid);
 		this.addsubtree(newnode);
 		
 		// return: id of the removed tree
