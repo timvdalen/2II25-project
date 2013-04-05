@@ -84,9 +84,19 @@ function graphClick(e){
 	}
 }
 
-function render(){
+var t;
+
+function Transformation(_x, _y, _scale) {
+	this.x = _x;
+	this.y = _y;
+	this.scale = _scale;
+}
+
+function render(transformation){
 	g.save();
 	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
+	g.translate(t.x, t.y);
+	g.scale(t.scale);
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
 	
@@ -104,9 +114,8 @@ function initCanvas(){
 	
 	//VERY TEMPORARY REPLACE WITH SCROLLING MECHANICS
 	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
-	g.translate(300,300);
-	
-	render();
+	t = new Transformation(300,300,1);
+	render(t);
 }
 
 $(function(){

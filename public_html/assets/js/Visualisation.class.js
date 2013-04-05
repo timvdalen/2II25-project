@@ -23,10 +23,7 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 			// tangentlimit should be the starting point for the limits
 			// calculate next radius
 			var nextr = radius(this.level+1);
-			
-			console.log("nextr " + nextr);
-			console.log("this.r " + this.r);
-			
+
 			// middle angle
 			var mid;
 			if (this.node.x == 0) {
@@ -35,21 +32,13 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 				if (this.node.y > 0) mid = Math.PI / 2;
 				else mid = -Math.PI / 2; // if this.node.y == 0, SHIT;
 			}
-			console.log("mid -> " + mid);
 			
 			// difference
 			var dif = Math.acos(this.r / nextr);
-			console.log(this.r / nextr);
 			
 			// limit
 			this.leftangle = mid - dif;
 			this.rightangle = mid + dif;
-			
-			console.log(mid + ".......................");
-			console.log(dif + ".......................");
-			
-			console.log(this.leftangle + "========================");
-			console.log(this.rightangle + "========================");
 		}
 	}
 	

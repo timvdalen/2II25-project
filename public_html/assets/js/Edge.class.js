@@ -34,7 +34,7 @@ function Edge(_node1, _node2, _weight) {
 		g.restore();
 	}
 	
-	this.inBounds = function(x0, y0) {
+	this.inBounds = function(x0, y0, t) {
 		// linker node (x1,y1)
 		if( this.node1.x < this.node2.x ){
 			x1 = this.node1.x;
@@ -51,8 +51,8 @@ function Edge(_node1, _node2, _weight) {
 		//functie opstellen
 		dydx = ( y1 - y2 ) / ( x1 - x2 );
 		b = y1 - dydx * x1;
-		f = dydx * x0 + b;
+		f = dydx * (x0 - t.x) + b;
 		
-		return x1 < x0 && x0 <x2 && Math.abs(f - y0) < 3; // 3 kan nog afhankelijk van dydx
+		return x1 < (x0 - t.x) && (x0 - t.x) < x2 && Math.abs(f - (y0 - t.y)) < 3; // 3 kan nog afhankelijk van dydx
 	}
 }
