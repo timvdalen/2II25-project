@@ -94,11 +94,12 @@ function Transformation(_x, _y, _scale) {
 
 function render(transformation){
 	g.save();
+	g.clearRect(0, 0, canvas.width, canvas.height);
+	g.restore();
+	
 	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
 	g.translate(t.x, t.y);
 	g.scale(t.scale);
-	g.clearRect(0, 0, canvas.width, canvas.height);
-	g.restore();
 	
 	if (graph != null) graph.draw(g, t);
 }
