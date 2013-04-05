@@ -1,23 +1,22 @@
-function Edge(_node1, _node2, _weight) {
+function Edge(_node1, _node2, _relation) {
 	this.node1 = _node1;
 	this.node2 = _node2;
 	this.mouseover = false;
-	this.weight = _weight;
+	this.relation = _relation;
 	
 	this.node1.degree++;
-	this.node1.weight += this.weight;
+	this.node1.weight += this.relation.weight;
 	this.node2.degree++;
-	this.node1.weight += this.weight;
+	this.node1.weight += this.relation.weight;
 	
 	this.draw = function(g) {
-		var color;
-		var size;
+		var color, size;
 		if (this.mouseover) {
 			color = '#AA0000';
-			size = this.weight + 2;
+			size = (this.relation.weight*4) + 2;
 		} else {
 			color = '#000000';
-			size = this.weight;
+			size = this.relation.weight * 4;
 		}
 		
 		x1 = this.node1.x;
@@ -30,8 +29,25 @@ function Edge(_node1, _node2, _weight) {
 		g.lineTo(x2,y2);
 		g.lineWidth = size;
 		g.strokeStyle = color;
-		g.stroke();		
+		g.stroke();
 		g.restore();
+		
+		if(this.mouseover){
+			var x, y, length, text;
+			x = x2-x1;
+			y = y2-y1;
+			length = Math.sqrt(x*x + y*y);
+			text = this.relation.description + ": " + this.relation.object;
+			
+			g.save();
+			g.font = '10pt arial';
+			g.textAlign = 'left';
+			g.fillStyle = '#000000';
+			g.rotate((Math.PI/2) - Math.atan(x/y));
+			g.fillText(text, (length-g.measureText(text).width)/2, -5);
+			console.log((length-g.measureText(text).width)/2);
+			g.restore();
+		}
 	}
 	
 	this.inBounds = function(x0, y0, t) {
