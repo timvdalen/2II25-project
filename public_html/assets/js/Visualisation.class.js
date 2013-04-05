@@ -37,9 +37,9 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 			}
 			console.log("mid -> " + mid);
 			
-			// difference NAN BULLSHIT HAPPENING!
-			var dif = Math.acos(nextr / this.r);
-			console.log(nextr / this.r);
+			// difference
+			var dif = Math.acos(this.r / nextr);
+			console.log(this.r / nextr);
 			
 			// limit
 			this.leftangle = mid - dif;
