@@ -117,7 +117,7 @@ function Graph() {
 		this.trees.pop();
 	}
 	
-	this.fix = function(node) {
+	this.fix = function(_node) {
 		var node = this.findNode(_node);
 		// assign positions to a nodes tree
 		console.log("fix ------------v");

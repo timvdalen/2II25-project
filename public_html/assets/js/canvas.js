@@ -90,16 +90,18 @@ function Transformation(_x, _y, _scale) {
 	this.x = _x;
 	this.y = _y;
 	this.scale = _scale;
+	
+	this.exe = function() {
+		g.translate(t.x, t.y);
+		g.scale(t.scale, t.scale);
+	}
 }
 
 function render(){
 	g.save();
+	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
-	
-	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
-	g.translate(t.x, t.y);
-	g.scale(t.scale);
 	
 	if (graph != null) graph.draw(g, t);
 }
@@ -116,6 +118,7 @@ function initCanvas(){
 	//VERY TEMPORARY REPLACE WITH SCROLLING MECHANICS
 	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
 	t = new Transformation(300,300,1);
+	t.exe();
 	render(t);
 }
 
