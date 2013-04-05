@@ -48,7 +48,6 @@ function Edge(_node1, _node2, _relation) {
 			rot = (Math.PI/2) - Math.atan(x/y) + (start ? Math.PI : 0);
 			g.rotate(rot);
 			g.fillText(text, ((length-g.measureText(text).width)/2) + (start ? x1 : x2), (start ? y1 : y2) - (start ? 50 : 0));
-			console.log((length-g.measureText(text).width)/2);
 			g.restore();
 		}
 	}
