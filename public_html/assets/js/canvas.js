@@ -33,7 +33,7 @@ function getCursorPosition(e) {
 function findNode(x, y){
 	for(var i=0; i<graph.nodes.length; i++){
 		var node = graph.nodes[i];
-		if(node.inBounds(x, y)){
+		if(node.inBounds(x, y, t)){
 			return node;
 		}
 	}
@@ -43,7 +43,7 @@ function findNode(x, y){
 function findEdge(x, y){
 	for(var i=0; i<graph.edges.length; i++){
 		var edge = graph.edges[i];
-		if(edge.inBounds(x, y)){
+		if(edge.inBounds(x, y, t)){
 			return edge;
 		}
 	}
@@ -94,13 +94,14 @@ function Transformation(_x, _y, _scale) {
 
 function render(transformation){
 	g.save();
-	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
-	g.translate(t.x, t.y);
-	g.scale(t.scale);
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
 	
-	if (graph != null) graph.draw(g);
+	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
+	g.translate(t.x, t.y);
+	g.scale(t.scale);
+	
+	if (graph != null) graph.draw(g, t);
 }
 
 function initCanvas(){

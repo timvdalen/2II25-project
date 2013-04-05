@@ -130,13 +130,13 @@ function Graph() {
 		console.log("fixed ----------^")
 	}
 
-	this.draw = function(g) {	
+	this.draw = function(g, t) {	
 		for (var i = 0; i < this.edges.length; i++) {
-			this.edges[i].draw(g);
+			this.edges[i].draw(g, t);
 		}
 		
 		for (var i = 0; i < this.nodes.length; i++) {
-			this.nodes[i].draw(g);
+			this.nodes[i].draw(g, t);
 		}
 	}
 }
