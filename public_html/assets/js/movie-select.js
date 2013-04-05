@@ -52,7 +52,8 @@ function addMovieAndRelated(title, callback){
 					
 					edge = new Edge(node1, node2, data.data.relation.weight);
 					
-					console.log(edge);
+					graph.addEdge(edge);
+					graph.fix(node1);
 				}, 2);
 				
 				img1.load({c: callback}, function(e){
@@ -96,6 +97,11 @@ $(function(){
 		addMovieAndRelated(data.title, function(){
 			$("#btn-add-movie-icon").removeClass("icon-spin icon-spinner").addClass("icon-add");
 		});
-		//TODO: Add movie to graph so the user has immediate feedback
+		var img = jQuery("<img>").attr("src", data.poster).load({
+			movie: data,
+		}, function(e){
+			var node = new Node(e.data.movie, $(this)[0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
+			graph.addWithoutEdge(node);
+		});
 	});
 });
