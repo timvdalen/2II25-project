@@ -92,7 +92,7 @@ function Transformation(_x, _y, _scale) {
 	this.scale = _scale;
 }
 
-function render(transformation){
+function render(){
 	g.save();
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();

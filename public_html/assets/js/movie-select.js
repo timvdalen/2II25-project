@@ -54,6 +54,7 @@ function addMovieAndRelated(title, callback){
 					
 					graph.addEdge(edge);
 					graph.fix(node1);
+					render();
 				}, 2);
 				
 				img1.load({c: callback}, function(e){
@@ -102,6 +103,7 @@ $(function(){
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
 			graph.addWithoutEdge(node);
+			render();
 		});
 	});
 });
