@@ -73,9 +73,9 @@ function Tree(node, _treeid, trees) {
 	this.todo = [];
 	
 	this.rootify = function(parent, child) {
-		var i = todo.indexOf(child);
+		var i = this.todo.indexOf(child);
 		if (i != -1) {
-			todo.splice(i, 1);
+			this.todo.splice(i, 1);
 			// set child node as new root node of it's own subtree
 			var links = (this.othertrees[child.treeid]).edges.filter(linksto(child));
 			var neighbours = (this.nodes.slice(0)).filter(linkedto(parent, links));
