@@ -7,6 +7,8 @@ function Node(_movie, _img, _x, _y, _size) {
 	this.mouseover = false;
 	this.degree = 0;
 	this.weight = 0;
+	this.treeid = -1;
+	this.children = [];
 	
 	this.draw = function(g) {
 		var color;
@@ -24,7 +26,7 @@ function Node(_movie, _img, _x, _y, _size) {
 			x = this.x - size;
 			y = this.y - size;
 		}
-
+		
 		g.save();
 		g.beginPath();
 		g.arc(x + size, y + size, size, 0, 2 * Math.PI);

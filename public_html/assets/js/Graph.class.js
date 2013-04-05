@@ -96,6 +96,19 @@ function Graph() {
 		}
 	}
 	
+	this.addedge = function(edge) {
+		this.edges.push(edge);
+		var atree = this.trees[this.treeids[edge.node1.treeid]];
+		var btree = this.trees[this.treeids[edge.node2.treeid]];
+		if (atree.nodes.length >= btree.nodes.length) {
+			var merge = atree.add(edge);
+			if (merge != -1) this.deletetree(merge);
+		} else /*if (atree.nodes.length < btree.nodes.length)*/ {
+			var merge = btree.add(edge);
+			if (merge != -1) this.deletetree(merge);
+		}
+	}
+
 	this.deletetree = function(treeid) {
 		for (var i = treeid; i < this.trees.length-1; i++) {
 			this.trees[i] = this.trees[i+1];
@@ -115,7 +128,7 @@ function Graph() {
 		v.update();
 		console.log("fixed ----------^")
 	}
-	
+
 	this.draw = function(g) {	
 		for (var i = 0; i < this.edges.length; i++) {
 			this.edges[i].draw(g);
