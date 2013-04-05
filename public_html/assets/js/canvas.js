@@ -138,7 +138,11 @@ $(function(){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
 			graph.addWithoutEdge(node);
 			if (graph.nodes.length > 0) {
-				graph.addEdge(new Edge(node, graph.nodes[0], graph.nodes.length));
+				graph.addEdge(new Edge(node, graph.nodes[0], {
+					weight: 1,
+					description: "Same actor",
+					object: "blah blah demo person"
+				}));
 			}
 			graph.fix(node);
 			

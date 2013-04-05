@@ -50,7 +50,7 @@ function addMovieAndRelated(title, callback){
 					node1 = new Node(data.data.firstMovie, data.imgs[0][0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
 					node2 = new Node(data.data.secondMovie, data.imgs[1][0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
 					
-					edge = new Edge(node1, node2, data.data.relation.weight);
+					edge = new Edge(node1, node2, data.data.relation);
 					
 					graph.addEdge(edge);
 					graph.fix(node1);
