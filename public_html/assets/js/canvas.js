@@ -90,6 +90,11 @@ function Transformation(_x, _y, _scale) {
 	this.x = _x;
 	this.y = _y;
 	this.scale = _scale;
+	
+	this.exe = function() {
+		g.translate(t.x, t.y);
+		g.scale(t.scale, t.scale);
+	}
 }
 
 function render(transformation){
@@ -113,8 +118,7 @@ function initCanvas(){
 	//VERY TEMPORARY REPLACE WITH SCROLLING MECHANICS
 	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
 	t = new Transformation(300,300,1);
-	g.translate(t.x, t.y);
-	g.scale(t.scale);
+	t.exe();
 	render(t);
 }
 
