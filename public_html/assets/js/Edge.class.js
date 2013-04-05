@@ -33,9 +33,11 @@ function Edge(_node1, _node2, _relation) {
 		g.restore();
 		
 		if(this.mouseover){
-			var x, y, length, text;
+			var x, y, start, length, text, rot;
+			start = (x1 < x2);
 			x = x2-x1;
 			y = y2-y1;
+			
 			length = Math.sqrt(x*x + y*y);
 			text = this.relation.description + ": " + this.relation.object;
 			
@@ -43,8 +45,9 @@ function Edge(_node1, _node2, _relation) {
 			g.font = '10pt arial';
 			g.textAlign = 'left';
 			g.fillStyle = '#000000';
-			g.rotate((Math.PI/2) - Math.atan(x/y));
-			g.fillText(text, (length-g.measureText(text).width)/2, -5);
+			rot = (Math.PI/2) - Math.atan(x/y) + (start ? Math.PI : 0);
+			g.rotate(rot);
+			g.fillText(text, ((length-g.measureText(text).width)/2) + (start ? x1 : x2), (start ? y1 : y2) - (start ? 50 : 0));
 			console.log((length-g.measureText(text).width)/2);
 			g.restore();
 		}
