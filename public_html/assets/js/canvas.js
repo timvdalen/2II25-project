@@ -97,9 +97,6 @@ function render(transformation){
 	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
-
-	g.translate(t.x, t.y);
-	g.scale(t.scale);
 	
 	if (graph != null) graph.draw(g, t);
 }
@@ -116,6 +113,8 @@ function initCanvas(){
 	//VERY TEMPORARY REPLACE WITH SCROLLING MECHANICS
 	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
 	t = new Transformation(300,300,1);
+	g.translate(t.x, t.y);
+	g.scale(t.scale);
 	render(t);
 }
 
