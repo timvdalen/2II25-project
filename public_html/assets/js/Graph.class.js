@@ -77,30 +77,30 @@ function Graph() {
 		if (atree.nodes.length >= btree.nodes.length) {
 			var merge = atree.add(edge);
 			if (merge != -1) this.deletetree(merge);
-			console.log(merge);
 		} else /*if (atree.nodes.length < btree.nodes.length)*/ {
 			var merge = btree.add(edge);
 			if (merge != -1) this.deletetree(merge);
-			console.log(merge);
 		}
 	}
 	
 	this.deletetree = function(treeid) {
 		for (var i = treeid; i < this.trees.length-1; i++) {
 			this.trees[i] = this.trees[i+1];
-			this.treeids[trees[i].treeid] = i;
+			this.treeids[this.trees[i].treeid] = i;
 		}
 		this.trees.pop();
 	}
 	
 	this.fix = function(node) {
 		// assign positions to a nodes tree
+		console.log("fix ------------v");
 		console.log(node.treeid);
 		console.log(this.treeids[node.treeid]);
 		console.log(this.trees[this.treeids[node.treeid]]);
 		v = new Visualisation(this.trees[this.treeids[node.treeid]].root)
-		console.log(this.trees[this.treeids[node.treeid]].nodes);
+		console.log(this.trees[this.treeids[node.treeid]].nodes.length);
 		v.update();
+		console.log("fixed ----------^")
 	}
 	
 	this.draw = function(g) {	

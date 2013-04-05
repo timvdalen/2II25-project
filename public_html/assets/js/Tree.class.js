@@ -46,22 +46,19 @@ function Tree(node, _treeid, trees) {
 	this.add = function(edge) {
 		if (edge.node1.treeid == this.treeid) {
 			if (edge.node2.treeid == this.treeid) {
-				console.log("internal");
 				//internal edge
-				edges.push(edge);
+				this.edges.push(edge);
 				return -1; //no tree should be removed
 			} else {
-				console.log("node1 old");
-				newnode = edge.node2;
-				oldnode = edge.node1;
+				var newnode = edge.node2;
+				var oldnode = edge.node1;
 				return this.attach(oldnode, newnode);
 				//toch return newnode.treeid; //tree of the newnode is merged with this one and can be removed
 			}
 		}
 		else if (edge.node2.treeid == this.treeid) {
-			console.log("node2 old");
-			newnode = edge.node1;
-			oldnode = edge.node2;
+			var newnode = edge.node1;
+			var oldnode = edge.node2;
 			return this.attach(oldnode, newnode);
 			//return newnode.treeid; //tree of the newnode is merged with this one and can be removed
 		} else {
@@ -83,7 +80,7 @@ function Tree(node, _treeid, trees) {
 				this.rootify(child, neighbours[i]);
 			}
 		}
-		newnode.children = neighbours;
+		child.children = neighbours;
 	}
 	
 	this.setid = function(root, id) {
@@ -96,7 +93,6 @@ function Tree(node, _treeid, trees) {
 	this.addsubtree = function(node) {
 		this.nodes.push(node);
 		node.treeid = this.treeid;
-		console.log("---" + this.treeid);
 		for (var i = 0; i < node.children.length; i++) {
 			this.addsubtree(node.children[i]);
 		}
@@ -108,11 +104,13 @@ function Tree(node, _treeid, trees) {
 		this.rootify(oldnode, newnode);
 		
 		// add nodes to this tree 
-		console.log(oldnode.treeid);
+		console.log("add from " + newnode.treeid + " to " + oldnode.treeid);
+		var merge = newnode.treeid;
 		this.addsubtree(newnode);
 		
 		// return: id of the removed tree
-		return newnode.treeid;
+		console.log("move to delete tree " + merge);
+		return merge;
 	}
 	
 /*

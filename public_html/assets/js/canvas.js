@@ -101,7 +101,11 @@ function initCanvas(){
 	canvas.height = height;
 
 	g = canvas.getContext("2d");
-
+	
+	//VERY TEMPORARY REPLACE WITH SCROLLING MECHANICS
+	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
+	g.translate(300,300);
+	
 	render();
 }
 
@@ -120,8 +124,8 @@ $(function(){
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
 			graph.addnode(node);
-			if (graph.nodes.length > 1) {
-				graph.addedge(new Edge(node, graph.nodes[0], 3));
+			if (graph.nodes.length > 0) {
+				graph.addedge(new Edge(node, graph.nodes[0], graph.nodes.length));
 			}
 			graph.fix(node);
 			
