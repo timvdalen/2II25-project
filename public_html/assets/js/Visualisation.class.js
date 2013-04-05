@@ -150,6 +150,7 @@ function Visualisation(_root) {
 	}
 	
 	this.update = function () {
+		console.log("visualise +++++++++++++++++++++++++ " + this.root.movie.title + " +++++++++++++++++++++++++");
 		this.root.x = 0;
 		this.root.y = 0;
 		this.makeRings(this.root, 0);
