@@ -70,17 +70,23 @@ function Tree(node, _treeid, trees) {
 		}
 	}
 	
+	this.todo = [];
+	
 	this.rootify = function(parent, child) {
-		// set child node as new root node of it's own subtree
-		var links = (this.othertrees[child.treeid]).edges.filter(linksto(child));
-		var neighbours = (this.nodes.slice(0)).filter(linkedto(parent, links));
-		for (var i = 0; i < neighbours.length; i++) {
-			if (neighbours[i] == parent) neighbours.splice(index, 1);//remove parent
-			else {
-				this.rootify(child, neighbours[i]);
+		var i = todo.indexOf(child);
+		if (i != -1) {
+			todo.splice(i, 1);
+			// set child node as new root node of it's own subtree
+			var links = (this.othertrees[child.treeid]).edges.filter(linksto(child));
+			var neighbours = (this.nodes.slice(0)).filter(linkedto(parent, links));
+			for (var i = 0; i < neighbours.length; i++) {
+				if (neighbours[i] == parent) neighbours.splice(index, 1);//remove parent
+				else {
+					this.rootify(child, neighbours[i]);
+				}
 			}
+			child.children = neighbours;
 		}
-		child.children = neighbours;
 	}
 	
 	this.setid = function(root, id) {
@@ -101,6 +107,7 @@ function Tree(node, _treeid, trees) {
 	this.attach = function(oldnode, newnode) {	
 		// set newly attached node as new root node of it's own tree
 		oldnode.children.push(newnode);
+		this.todo = this.nodes.slice(0);
 		this.rootify(oldnode, newnode);
 		
 		// add nodes to this tree 
