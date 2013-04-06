@@ -1,0 +1,7 @@
+SELECT * WHERE {
+	<http://dbpedia.org/resource/movie> ?rel ?actor.
+	?b ?rel ?actor.
+	FILTER(
+		((?rel = dbpedia-owl:starring) || (?rel = dbpedia-owl:director) || (?rel = dbpedia-owl:editing) || (?rel = dbpedia-owl:setDesigner))&&(?b != <http://dbpedia.org/resource/movie>)
+	)
+} LIMIT 40
