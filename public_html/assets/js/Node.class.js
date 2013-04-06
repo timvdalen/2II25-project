@@ -47,10 +47,6 @@ function Node(_movie, _img, _x, _y, _size) {
 		g.closePath();
 		g.restore();
 	}
-	/*
-	this.inBounds = function(x, y) {
-		return (x >= this.x && x <= (this.x + this.size*2) && y >= this.y && y <= (this.y + this.size*2));
-	}*/
 	
 	this.inBounds = function(x, y, t) {
 		var dx = x - t.x - this.offset - this.x;
