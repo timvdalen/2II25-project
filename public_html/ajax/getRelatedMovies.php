@@ -31,12 +31,18 @@ $dbpedia_title = $empty_movie->getDBpedia();
 
 $movie = Movie::getTrakt($dbpedia_title);
 
+$relation_types = array();
+foreach(MoviesRelation::relations() as $relation){
+	$relation_types[] = "(?rel = <" . $relation->type . ">)";
+}
+$relation_string = implode(" || ", $relation_types);
+
 $query = <<<ENDSPARQL
 SELECT * WHERE {
 	<http://dbpedia.org/resource/$dbpedia_title> ?rel ?actor.
 	?b ?rel ?actor.
 	FILTER(
-		((?rel = dbpedia-owl:starring) || (?rel = dbpedia-owl:director))&&(?b != <http://dbpedia.org/resource/$dbpedia_title>)
+		($relation_string)&&(?b != <http://dbpedia.org/resource/$dbpedia_title>)
 	)
 } LIMIT 40
 ENDSPARQL;
