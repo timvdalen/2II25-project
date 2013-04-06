@@ -75,30 +75,15 @@ function Graph() {
 	}
 	
 	this.addNode = function(node) {
-		console.log("ADD NODE " + node.movie.title);
-		console.log(this.treeids);
 		this.nodes.push(node);
 		this.trees.push(new Tree(node, this.treeids.length, this.trees, this.treeids));
 		this.treeids.push(this.trees.length-1); //trees[treeids[i]] will yield the tree with id i.
 		node.treeid = this.treeids.length-1;
-		console.log(this.treeids);
-		console.log("treeid: " + node.treeid);
-		console.log("ADDED NODE");
 	}
 	
-	this.addEdge = function(edge) {
-		console.log("EDGE add");
-		console.log(edge);
-		console.log(edge.node1.movie.title + "-" + edge.node2.movie.title);
-		console.log(edge.node1.treeid + "-" + edge.node2.treeid);
-		console.log(this.treeids[edge.node1.treeid] + "-" + this.treeids[edge.node2.treeid]);
-		
+	this.addEdge = function(edge) {		
 		edge.node1 = this.findNode(edge.node1);
 		edge.node2 = this.findNode(edge.node2);
-		
-		console.log(edge.node1.movie.title + "-" + edge.node2.movie.title);
-		console.log(edge.node1.treeid + "-" + edge.node2.treeid);
-		console.log(this.treeids[edge.node1.treeid] + "-" + this.treeids[edge.node2.treeid]);
 		
 		this.edges.push(edge);
 		var atree = this.trees[this.treeids[edge.node1.treeid]];
@@ -110,9 +95,6 @@ function Graph() {
 			var merge = btree.add(edge);
 			if (merge != -1) this.deletetree(merge);
 		}
-		console.log(this.trees);
-		console.log(this.treeids);
-		console.log("EDGE added");
 	}
 
 	this.deletetree = function(treeid) {
@@ -126,16 +108,8 @@ function Graph() {
 	this.fix = function(_node) {
 		var node = this.findNode(_node);
 		// assign positions to a nodes tree
-		/*
-		console.log("fix ------------v");
-		console.log(node.treeid);
-		console.log(this.treeids[node.treeid]);
-		console.log(this.trees[this.treeids[node.treeid]]);
-		*/
 		v = new Visualisation(this.trees[this.treeids[node.treeid]].root)
-		//console.log(this.trees[this.treeids[node.treeid]].nodes.length);
 		v.update();
-		//console.log("fixed ----------^")
 	}
 
 	this.draw = function(g, t) {	

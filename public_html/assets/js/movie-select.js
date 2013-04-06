@@ -84,9 +84,7 @@ $(function(){
 				return {results: data};
 			}
 		},
-		initSelection: function(element, callback) {
-			console.log(element);
-		},
+		initSelection: function(element, callback) {},
 		formatResult: movieFormatResult,
 		formatSelection: movieFormatSelection,
 		containerCssClass: "pull-right movie-select-bar",

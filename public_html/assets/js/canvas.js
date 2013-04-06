@@ -119,22 +119,15 @@ function View(_t) {
 	
 	this.up = function(e) {
 		dragging = false;
-		//console.log("ADJUST VIEW UP");
 		var loc = getCursorPosition(e);
-		/*if (this.lastloc != null) {
-			this.trans.x = this.trans.x + loc.x - this.lastloc.x;
-			this.trans.y = this.trans.y + loc.y - this.lastloc.y;
-		}*/
 		this.lastloc = null;
 	}
 	
 	this.adjust = function(e) {
-		//console.log("ADJUST VIEW");
 		var loc = getCursorPosition(e);
 		if (dragging = true) {
 			if (this.lastloc != null) {
 				this.trans.x = this.trans.x + loc.x - this.lastloc.x;
-				//console.log(loc.x + " - " + this.lastloc.x);
 				this.trans.y = this.trans.y + loc.y - this.lastloc.y;
 			} else {
 				this.lastloc = loc;
@@ -147,10 +140,8 @@ function View(_t) {
 	}
 	
 	this.exe = function() {
-		//console.log("USE ADJUSTED VIEW");
 		t.x = t.x + this.trans.x;
 		t.y = t.y + this.trans.y;
-		//console.log(this.trans.x + " : " + this.trans.y);
 	}
 }
 

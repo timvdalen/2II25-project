@@ -39,7 +39,6 @@
 				<ul class="nav">
 ENDHTML;
 
-			//TODO: active page
 			foreach($this->items as $page){
 				if(!$page->inMenu){
 					continue;
