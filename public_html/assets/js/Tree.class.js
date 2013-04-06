@@ -50,6 +50,7 @@ function Tree(node, _treeid, trees) {
 				this.edges.push(edge);
 				return -1; //no tree should be removed
 			} else {
+				this.edges.push(edge);
 				var newnode = edge.node2;
 				var oldnode = edge.node1;
 				return this.attach(oldnode, newnode);
@@ -57,6 +58,7 @@ function Tree(node, _treeid, trees) {
 			}
 		}
 		else if (edge.node2.treeid == this.treeid) {
+			this.edges.push(edge);
 			var newnode = edge.node1;
 			var oldnode = edge.node2;
 			return this.attach(oldnode, newnode);
@@ -109,6 +111,11 @@ function Tree(node, _treeid, trees) {
 		oldnode.children.push(newnode);
 		this.todo = this.nodes.slice(0);
 		this.rootify(oldnode, newnode);
+		
+		// add edges to this tree
+		for (var i = 0; i < this.othertrees[newnode.treeid].edges.length; i++) {
+			this.edges.push(this.othertrees[newnode.treeid].edges[i]);
+		}
 		
 		// add nodes to this tree 
 		console.log("add from " + newnode.treeid + " to " + oldnode.treeid);
