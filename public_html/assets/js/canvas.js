@@ -193,35 +193,9 @@ $(function(){
 	graph = new Graph();
 
 	initCanvas();
-
-	for(var i=0; i<movies.length; i++){
-		var movie = movies[i];
-		var img = jQuery("<img>").attr("src", movie.poster).load({
-			movie: movie,
-			i: i
-		}, function(e){
-			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
-			graph.addWithoutEdge(node);
-			if (graph.nodes.length > 1) {
-				graph.addEdge(new Edge(node, graph.nodes[0], {
-					weight: 1,
-					description: "Same actor",
-					object: "blah blah demo person"
-				}));
-			}
-			graph.fix(node);
-			
-			/*graph.nodes.push(node);
-			if (graph.nodes.length > 1) {
-				graph.edges.push(new Edge(node, graph.nodes[0], 3));
-			}
-			graph.reconstruct();*/
-			render();
-		});
-		$("#images_preload").append(img);
-	}
 	
-	showMovie(movies[0]);
+	var info = new Movie("", "", "Hi there, welcome!", "", "This is Cinetre.es. To get started, add a movie from the bar above or import a few from your favorite source. Drag around the canvas to the left (or top, if you're on a mobile device) to explore your graphs! Once you've selected a movie, I'll find a few related movies for you. You can click a movie in that graph to get some more info about it. Move your move over a relation between two movies to see how they relate to each other.", "");
+	showMovie(info);
 	
 	$("#graph").click(graphClick);
 	$("#graph").mousemove(graphMove);

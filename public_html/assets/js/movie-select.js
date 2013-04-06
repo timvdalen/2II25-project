@@ -47,8 +47,8 @@ function addMovieAndRelated(title, callback){
 				}, function(data){
 					var node1, node2, edge;
 				
-					node1 = new Node(data.data.firstMovie, data.imgs[0][0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
-					node2 = new Node(data.data.secondMovie, data.imgs[1][0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
+					node1 = new Node(data.data.firstMovie, data.imgs[0][0], 300, 0, 50);
+					node2 = new Node(data.data.secondMovie, data.imgs[1][0], 300, 0, 50);
 					
 					edge = new Edge(node1, node2, data.data.relation);
 					
@@ -101,7 +101,7 @@ $(function(){
 		var img = jQuery("<img>").attr("src", data.poster).load({
 			movie: data,
 		}, function(e){
-			var node = new Node(e.data.movie, $(this)[0], Math.random()*$("#graph").width(), Math.random()*$("#graph").height(), 50);
+			var node = new Node(e.data.movie, $(this)[0], 100, 100, 50);
 			graph.addWithoutEdge(node);
 			render();
 		});
