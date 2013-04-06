@@ -183,7 +183,7 @@ function initCanvas(){
 	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
 	t = new Transformation(300,300,1);
 	t.exe();
-	view = new View(new Transformation(0,0,1));
+	if (view == null) view = new View(new Transformation(0,0,1));
 	render(t);
 }
 
