@@ -26,11 +26,11 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 
 			// middle angle
 			var mid;
-			if (this.node.x == 0) {
+			if (this.node.x != 0) {
 				mid = Math.atan(this.node.y / this.node.x);
 			} else {
-				if (this.node.y > 0) mid = Math.PI / 2;
-				else mid = -Math.PI / 2; // if this.node.y == 0, SHIT;
+				if (this.node.y < 0) mid = Math.PI / 2;
+				else mid = -Math.PI / 2; // if this.node.y == 0, that's invalid
 			}
 			
 			// difference
@@ -77,7 +77,7 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 		var range = this.leftangle - this.rightangle;
 		var step = range / (this.node.children.length + 1);
 		for (var i = 0; i < this.node.children.length; i++) {
-			this.slots[i] = this.leftangle + step / 2 + step * i;
+			this.slots[i] = this.leftangle + step / 2 + step * i - Math.PI / 2;
 		}
 	}
 	
@@ -116,7 +116,7 @@ function Ring(_root, _level, _previousring) {
 		var left = null;
 		
 		console.log("amount of nodes on ring: " + id);
-		i = id-1;
+		var i = id-1;
 		while (i >= 0) {
 			if (this.nodes[i].children.length > 0) {
 				left = this.nodes[i];
