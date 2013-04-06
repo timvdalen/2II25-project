@@ -9,6 +9,8 @@ function Edge(_node1, _node2, _relation) {
 	this.node2.degree++;
 	this.node1.weight += this.relation.weight;
 	
+	this.offset = 0;
+	
 	this.draw = function(g) {
 		var color, size;
 		if (this.mouseover) {
@@ -71,6 +73,6 @@ function Edge(_node1, _node2, _relation) {
 		b = y1 - dydx * x1;
 		f = dydx * (x0 - t.x) + b;
 		
-		return x1 < (x0 - t.x) && (x0 - t.x) < x2 && Math.abs(f - (y0 - t.y)) < 3; // 3 kan nog afhankelijk van dydx
+		return x1 < (x0 - t.x - this.offset) && (x0 - t.x - this.offset) < x2 && Math.abs(f - (y0 - t.y)) < 3; // 3 kan nog afhankelijk van dydx
 	}
 }

@@ -2,6 +2,10 @@ var canvas;
 var g;
 var graph;
 
+var t;
+var view;
+var dragging = false;
+
 function showMovie(movie){
 	$("#movie-title").text(movie.title);
 	$("#movie-image").attr("src", movie.poster);
@@ -50,6 +54,18 @@ function findEdge(x, y){
 	return null;
 }
 
+function graphUp(e) {
+	if (view != null) {
+		view.up(e);
+	}
+}
+
+function graphDown(e) {
+	if (view != null) {
+		view.adjust(e);
+	}
+}
+
 function graphMove(e){
 	var loc = getCursorPosition(e);
 	
@@ -74,6 +90,8 @@ function graphMove(e){
 		}
 		render();
 	}
+	
+	if (dragging && view != null) view.adjust(e); 
 }
 
 function graphClick(e){
@@ -83,8 +101,6 @@ function graphClick(e){
 		showMovie(node.movie);
 	}
 }
-
-var t;
 
 function Transformation(_x, _y, _scale) {
 	this.x = _x;
@@ -97,13 +113,61 @@ function Transformation(_x, _y, _scale) {
 	}
 }
 
+function View(_t) {
+	this.trans = _t;
+	this.lastloc;
+	
+	this.up = function(e) {
+		dragging = false;
+		//console.log("ADJUST VIEW UP");
+		var loc = getCursorPosition(e);
+		/*if (this.lastloc != null) {
+			this.trans.x = this.trans.x + loc.x - this.lastloc.x;
+			this.trans.y = this.trans.y + loc.y - this.lastloc.y;
+		}*/
+		this.lastloc = null;
+	}
+	
+	this.adjust = function(e) {
+		//console.log("ADJUST VIEW");
+		var loc = getCursorPosition(e);
+		if (dragging = true) {
+			if (this.lastloc != null) {
+				this.trans.x = this.trans.x + loc.x - this.lastloc.x;
+				//console.log(loc.x + " - " + this.lastloc.x);
+				this.trans.y = this.trans.y + loc.y - this.lastloc.y;
+			} else {
+				this.lastloc = loc;
+			}
+			if (this.lastloc.x != loc.x || this.lastloc.y != loc.y) this.lastloc = loc;
+		} else {
+			dragging = true;
+			this.lastloc = loc;
+		}
+	}
+	
+	this.exe = function() {
+		//console.log("USE ADJUSTED VIEW");
+		t.x = t.x + this.trans.x;
+		t.y = t.y + this.trans.y;
+		//console.log(this.trans.x + " : " + this.trans.y);
+	}
+}
+
 function render(){
 	g.save();
 	g.setTransform(1, 0, 0, 1, 0, 0); //just to be sure future drawing transformations
 	g.clearRect(0, 0, canvas.width, canvas.height);
 	g.restore();
 	
-	if (graph != null) graph.draw(g, t);
+	if (graph != null) {
+		t.x = canvas.width / 2;
+		t.y = canvas.height / 2;
+		view.exe();
+		g.setTransform(1, 0, 0, 1, 0, 0);
+		t.exe();
+		graph.draw(g, t);
+	}
 }
 
 function initCanvas(){
@@ -119,6 +183,7 @@ function initCanvas(){
 	// todo: SCALING, SCROLLING, note: KEEP IN MIND MOUSEOVERS, remove: EDGE MOUSEOVER (optional)
 	t = new Transformation(300,300,1);
 	t.exe();
+	if (view == null) view = new View(new Transformation(0,0,1));
 	render(t);
 }
 
@@ -137,7 +202,7 @@ $(function(){
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
 			graph.addWithoutEdge(node);
-			if (graph.nodes.length > 0) {
+			if (graph.nodes.length > 1) {
 				graph.addEdge(new Edge(node, graph.nodes[0], {
 					weight: 1,
 					description: "Same actor",
@@ -160,5 +225,7 @@ $(function(){
 	
 	$("#graph").click(graphClick);
 	$("#graph").mousemove(graphMove);
+	$("#graph").mousedown(graphDown);
+	$("#graph").mouseup(graphUp);
 	$(window).resize(initCanvas);
 });

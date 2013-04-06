@@ -26,11 +26,11 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 
 			// middle angle
 			var mid;
-			if (this.node.x == 0) {
+			if (this.node.x != 0) {
 				mid = Math.atan(this.node.y / this.node.x);
 			} else {
-				if (this.node.y > 0) mid = Math.PI / 2;
-				else mid = -Math.PI / 2; // if this.node.y == 0, SHIT;
+				if (this.node.y < 0) mid = Math.PI / 2;
+				else mid = -Math.PI / 2; // if this.node.y == 0, that's invalid
 			}
 			
 			// difference
@@ -77,20 +77,24 @@ function Section(_level, _r, _node, _lparent, _rparent) {
 		var range = this.leftangle - this.rightangle;
 		var step = range / (this.node.children.length + 1);
 		for (var i = 0; i < this.node.children.length; i++) {
-			this.slots[i] = this.leftangle + step / 2 + step * i;
+			this.slots[i] = this.leftangle + step / 2 + step * i - Math.PI / 2;
 		}
 	}
 	
 	this.assignpos = function() {
+		/*
 		console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASIGN");
 		console.log(this.node.children.length);
+		*/
 		for (var i = 0; i < this.node.children.length; i ++) {
 			this.node.children[i].x = this.r * Math.cos(this.slots[i]);
 			this.node.children[i].y = this.r * Math.sin(this.slots[i]);
+			/*
 			console.log(" + assign position + ");
 			console.log(this.node.children[i].x + ", " + this.node.children[i].y);
 			console.log(this.node.children[i]);
 			console.log(" + end assign position + ");
+			*/
 		}
 	}
 }
@@ -111,15 +115,16 @@ function Ring(_root, _level, _previousring) {
 		var id = this.nodes.length;
 		var left = null;
 		
-		i = id-1;
+		console.log("amount of nodes on ring: " + id);
+		var i = id-1;
 		while (i >= 0) {
 			if (this.nodes[i].children.length > 0) {
 				left = this.nodes[i];
 				this.sections[i].rparent = node;
 				// SECTION ALTERED UPDATE SECTION LIMITS
-				i--;
 				continue;
 			}
+			i--;
 		}
 	
 		this.nodes.push(node);
@@ -131,8 +136,10 @@ function Ring(_root, _level, _previousring) {
 function Visualisation(_root) {
 	this.root = _root;
 	this.rings = [];
+	/*
 	console.log("treestructure");
 	console.log(this.root);
+	*/
 	
 	this.makeRings = function (node, level) {
 		if (!this.rings[level]) this.rings[level] = new Ring(this.root, level, this.rings[level-1]);
@@ -150,7 +157,7 @@ function Visualisation(_root) {
 	}
 	
 	this.update = function () {
-		console.log("visualise +++++++++++++++++++++++++ " + this.root.movie.title + " +++++++++++++++++++++++++");
+		//console.log("visualise +++++++++++++++++++++++++ " + this.root.movie.title + " +++++++++++++++++++++++++");
 		this.root.x = 0;
 		this.root.y = 0;
 		this.makeRings(this.root, 0);
