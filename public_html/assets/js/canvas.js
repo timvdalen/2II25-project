@@ -137,7 +137,7 @@ $(function(){
 		}, function(e){
 			var node = new Node(e.data.movie, $(this)[0], 200*(e.data.i+1), 50, 50);
 			graph.addWithoutEdge(node);
-			if (graph.nodes.length > 0) {
+			if (graph.nodes.length > 1) {
 				graph.addEdge(new Edge(node, graph.nodes[0], {
 					weight: 1,
 					description: "Same actor",
