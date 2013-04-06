@@ -139,12 +139,22 @@ function Graph() {
 	}
 
 	this.draw = function(g, t) {	
-		for (var i = 0; i < this.edges.length; i++) {
-			this.edges[i].draw(g, t);
-		}
+		var spacing = 300;
+		var space = 0;
 		
-		for (var i = 0; i < this.nodes.length; i++) {
-			this.nodes[i].draw(g, t);
+		for (var t = 0; t < this.trees.length; t++) {
+			for (var i = 0; i < this.trees[t].edges.length; i++) {
+				this.trees[t].edges[i].offset = space;
+				this.trees[t].edges[i].draw(g, t);
+			}
+			
+			for (var i = 0; i < this.trees[t].nodes.length; i++) {
+				this.trees[t].nodes[i].offset = space;
+				this.trees[t].nodes[i].draw(g, t);
+			}
+			
+			g.translate(300, 0);
+			space += spacing;
 		}
 	}
 }

@@ -10,6 +10,8 @@ function Node(_movie, _img, _x, _y, _size) {
 	this.treeid = -1;
 	this.children = [];
 	
+	this.offset = 0;
+	
 	this.draw = function(g, t) {
 		var color;
 		var size;
@@ -51,7 +53,7 @@ function Node(_movie, _img, _x, _y, _size) {
 	}*/
 	
 	this.inBounds = function(x, y, t) {
-		var dx = x - t.x - this.x;
+		var dx = x - t.x - this.offset - this.x;
 		var dy = y - t.y - this.y;
 		return ((this.size * t.scale) > Math.sqrt(dx*dx + dy*dy));
 	}
